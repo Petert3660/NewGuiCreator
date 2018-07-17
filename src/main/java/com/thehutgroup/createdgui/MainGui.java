@@ -268,8 +268,6 @@ public class MainGui extends JFrame {
                         } else if (comp0.getText().equals(currentText)) {
                             JOptionPane.showMessageDialog(tg, "This code has already been compiled",
                                 TITLE, JOptionPane.INFORMATION_MESSAGE);
-                        } else {
-                            compileFile();
                         }
                     } else {
                         compileFile();
