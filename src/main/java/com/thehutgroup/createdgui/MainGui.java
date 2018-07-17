@@ -261,24 +261,18 @@ public class MainGui extends JFrame {
         menuItem50.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
-                    try {
+                    if (StringUtils.isEmpty(comp0.getText()) || comp0.getText().equals(currentText)) {
                         if (StringUtils.isEmpty(comp0.getText())) {
-                            if (openOpenFileChoice("GUI Files", "gui") == 0) {
-                                JOptionPane.showMessageDialog(tg, "No file selected, or no files in project",
-                                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-                            } else if (!comp0.getText().equals(currentText)) {
-                                compileFile();
-                                currentText = comp0.getText();
-                            } else {
-                                JOptionPane.showMessageDialog(tg, "This code has already been compiled",
-                                        TITLE, JOptionPane.INFORMATION_MESSAGE);
-                            }
+                            JOptionPane.showMessageDialog(tg, "No file selected, or no files in project",
+                                TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        } else if (comp0.getText().equals(currentText)) {
+                            JOptionPane.showMessageDialog(tg, "This code has already been compiled",
+                                TITLE, JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             compileFile();
-                            currentText = comp0.getText();
                         }
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                    } else {
+                        compileFile();
                     }
                 } else {
                     JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before compiling",
@@ -474,17 +468,24 @@ public class MainGui extends JFrame {
         try {
             String command = Statics.COMPILE_SCRIPT_NAME + projectName + " " + testFile.getName();
             Process buildRun = Runtime.getRuntime().exec(command);
+            while(buildRun.isAlive()) {
+                int x = 0;
+            }
+            currentText = comp0.getText();
+            JOptionPane.showMessageDialog(tg, "The code has compiled successfully - ready to test!",
+                TITLE, JOptionPane.INFORMATION_MESSAGE);
+            menuItem51.setEnabled(true);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-
-        menuItem51.setEnabled(true);
     }
 
     private void runFileChoice() throws IOException {
         try {
             String command = Statics.RUN_SCRIPT_NAME + projectName + " " + testFile.getName();
             Process buildRun = Runtime.getRuntime().exec(command);
+            JOptionPane.showMessageDialog(tg, "Starting the GUI test - please wait!",
+                TITLE, JOptionPane.INFORMATION_MESSAGE);
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
