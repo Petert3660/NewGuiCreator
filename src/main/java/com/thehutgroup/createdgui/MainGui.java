@@ -481,6 +481,7 @@ public class MainGui extends JFrame {
     private void runFileChoice() throws IOException {
         try {
             String command = Statics.RUN_SCRIPT_NAME + projectName + " " + testFile.getName();
+            System.out.println("The command being run to test the GUI is - " + command);
             Process buildRun = Runtime.getRuntime().exec(command);
             JOptionPane.showMessageDialog(tg, "Starting the GUI test - please wait!",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
