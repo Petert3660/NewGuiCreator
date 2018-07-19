@@ -124,4 +124,12 @@ public class GuiProperties {
     public void setMenues(ArrayList<String> menues) {
         this.menues = menues;
     }
+
+    public void clearAllArrays() {
+        components.clear();
+        panelComponent.clear();
+        buttons.clear();
+        radioButtons.clear();
+        menues.clear();
+    }
 }

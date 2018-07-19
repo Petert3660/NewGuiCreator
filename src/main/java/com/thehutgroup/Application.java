@@ -1,9 +1,11 @@
 package com.thehutgroup;
 
 import com.thehutgroup.createdgui.MainGui;
+import com.thehutgroup.guicomponents.GuiProperties;
 import com.thehutgroup.guis.GuiHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,6 +22,9 @@ public class Application implements CommandLineRunner {
     private static final String PROPS_FILENAME = "application";
     private static final String SERVER_PORT_PROPERTY = "server.port";
 
+    @Autowired
+    GuiProperties guiProperties;
+
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class)
                 .headless(false)
@@ -32,7 +37,7 @@ public class Application implements CommandLineRunner {
     }
 
     private void testGui() {
-        MainGui tmg = new MainGui();
+        MainGui tmg = new MainGui(guiProperties);
         GuiHelper.showFrame(tmg);
     }
 }
