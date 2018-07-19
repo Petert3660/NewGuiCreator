@@ -28,5 +28,5 @@ public class FreeRadioButton extends JRadioButton {
         this.setSelected(true);
     }
 
-    public String getLabelText() { return this.getLabel(); }
+    public String getLabelText() { return this.getText(); }
 }
