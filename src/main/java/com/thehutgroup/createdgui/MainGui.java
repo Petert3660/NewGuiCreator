@@ -1,22 +1,34 @@
 package com.thehutgroup.createdgui;
 
+import com.thehutgroup.guiScriptParser.GuiBuilder;
+import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeTextArea;
+import com.thehutgroup.guicomponents.GuiProperties;
 import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.MenuTitles;
 import com.thehutgroup.statics.Statics;
 import com.thehutgroup.utilities.FileUtilities;
-import org.apache.commons.lang.StringUtils;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.FileCopyUtils;
 
 public class MainGui extends JFrame {
 
@@ -51,7 +63,13 @@ public class MainGui extends JFrame {
 
     private String currentText = "";
 
-    public MainGui() {
+    private GuiProperties guiProperties;
+
+    @Autowired
+    public MainGui(GuiProperties guiProperties) {
+
+        this.guiProperties = guiProperties;
+
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
@@ -270,7 +288,11 @@ public class MainGui extends JFrame {
                                 TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
-                        compileFile();
+                        try {
+                            compileFile(projectName, testFile.getName());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 } else {
                     JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before compiling",
@@ -411,8 +433,8 @@ public class MainGui extends JFrame {
         fc.setFileFilter(filter);
         int returnVal = fc.showSaveDialog(tg);
         if (returnVal == 0) {
-            String allText = comp0.getText();
             String filename = fc.getSelectedFile().getName().replace(Statics.GUI_EXTENSION, "");
+            String allText = comp0.getText();
             FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + filename
                     + Statics.GUI_EXTENSION, allText);
         }
@@ -462,20 +484,45 @@ public class MainGui extends JFrame {
         return numberOfFiles;
     }
 
-    private void compileFile() {
-        try {
-            String command = Statics.COMPILE_SCRIPT_NAME + projectName + " " + testFile.getName();
-            Process buildRun = Runtime.getRuntime().exec(command);
-            while(buildRun.isAlive()) {
-                int x = 0;
-            }
-            currentText = comp0.getText();
-            JOptionPane.showMessageDialog(tg, "The code has compiled successfully - ready to test!",
-                TITLE, JOptionPane.INFORMATION_MESSAGE);
-            menuItem51.setEnabled(true);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+//    private void compileFile() {
+//        try {
+//            String command = Statics.COMPILE_SCRIPT_NAME + projectName + " " + testFile.getName();
+//            Process buildRun = Runtime.getRuntime().exec(command);
+//            while(buildRun.isAlive()) {
+//                int x = 0;
+//            }
+//            currentText = comp0.getText();
+//            JOptionPane.showMessageDialog(tg, "The code has compiled successfully - ready to test!",
+//                TITLE, JOptionPane.INFORMATION_MESSAGE);
+//            menuItem51.setEnabled(true);
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace();
+//        }
+//    }
+
+    private void compileFile(String projName, String fileName) throws IOException {
+        String allText = comp0.getText();
+        FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
+        System.out.println("Creating GUI Properties and Compiling!");
+        createGuiProperties(projName, fileName);
+        System.out.println("ScriptDirectedGui: Copying compiled GUI in to TestGui class!");
+        String src = Statics.SCD_RESOURCES_DIR + "TestGui.java.tmp";
+        String target = Statics.FINAL_GUI_TARGET_DIR + "TestGui.java";
+        FileCopyUtils.copy(new File(src), new File(target));
+        FileCopyUtils.copy(new File(target), new File(Statics.FINAL_GUI_DIR + projName + "\\TestGui.java"));
+        FileUtils.deleteQuietly(new File(src));
+        if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
+            System.out.println("ScriptDirectedGui: ERROR - The file, " + projName + "\\" +fileName + " does not exist in the GUI script source directory - exiting!");
         }
+    }
+
+    private void createGuiProperties(String projectName, String scriptName) {
+        System.out.println("ScriptDirectedGui: This method will run at startup and create the appropriate GUI properties from the input script");
+        guiProperties.clearAllArrays();
+        GuiScriptParser gsp = new GuiScriptParser(guiProperties);
+        gsp.readInputScript(projectName, scriptName);
+        GuiBuilder gb = new GuiBuilder(guiProperties);
+        gb.buildGuiClass();
     }
 
     private void runFileChoice() throws IOException {

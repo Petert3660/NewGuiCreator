@@ -33,6 +33,3 @@ jar {
     }
 }
 
-task copyFiles {
-    println "In copy files now"
-}
