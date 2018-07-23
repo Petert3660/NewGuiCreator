@@ -16,6 +16,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
@@ -102,6 +104,27 @@ public class MainGui extends JFrame {
           this.setJMenuBar(menuBar);
         this.add(p1);
 
+        comp0.getTextArea().addKeyListener(new KeyListener() {
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!comp0.getText().equals(currentText)) {
+                    menuItem51.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (!comp0.getText().equals(currentText)) {
+                    menuItem51.setEnabled(false);
+                }            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if (!comp0.getText().equals(currentText)) {
+                    menuItem51.setEnabled(false);
+                }            }
+        });
     }
 
     private void setUpMenuBar() {
@@ -316,7 +339,7 @@ public class MainGui extends JFrame {
             }
         });
 
-        //menuItem51.setEnabled(false);
+        menuItem51.setEnabled(false);
 
         menuBar.add(menu5);
 
@@ -404,7 +427,7 @@ public class MainGui extends JFrame {
 
     private void resetCompileOptions() {
         menuItem51.setText(MenuTitles.RUN_TEST_GUI);
-        //menuItem51.setEnabled(false);
+        menuItem51.setEnabled(false);
     }
 
     private int saveUnsavedInput() throws IOException {
@@ -473,7 +496,7 @@ public class MainGui extends JFrame {
             testFile = file;
             updateBuiltFile(testFile.getName());
             menuItem51.setText("Run TestGui - " + testFile.getName());
-            //menuItem51.setEnabled(false);
+            menuItem51.setEnabled(false);
             FileUtilities.writeStringToFile(Statics.LAST_SCRIPT, "");
             String allText = FileUtilities.writeFileToString(Statics.RESOURCES_DIR + projectName + "\\" + file.getName());
             comp0.setText(allText);
@@ -483,22 +506,6 @@ public class MainGui extends JFrame {
 
         return numberOfFiles;
     }
-
-//    private void compileFile() {
-//        try {
-//            String command = Statics.COMPILE_SCRIPT_NAME + projectName + " " + testFile.getName();
-//            Process buildRun = Runtime.getRuntime().exec(command);
-//            while(buildRun.isAlive()) {
-//                int x = 0;
-//            }
-//            currentText = comp0.getText();
-//            JOptionPane.showMessageDialog(tg, "The code has compiled successfully - ready to test!",
-//                TITLE, JOptionPane.INFORMATION_MESSAGE);
-//            menuItem51.setEnabled(true);
-//        } catch (IOException ioe) {
-//            ioe.printStackTrace();
-//        }
-//    }
 
     private void compileFile(String projName, String fileName) throws IOException {
         String allText = comp0.getText();
@@ -514,6 +521,8 @@ public class MainGui extends JFrame {
         if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
             System.out.println("ScriptDirectedGui: ERROR - The file, " + projName + "\\" +fileName + " does not exist in the GUI script source directory - exiting!");
         }
+        JOptionPane.showMessageDialog(tg, "The code has compiled successfully - ready to test!",
+                TITLE, JOptionPane.INFORMATION_MESSAGE);
         menuItem51.setEnabled(true);
     }
 
