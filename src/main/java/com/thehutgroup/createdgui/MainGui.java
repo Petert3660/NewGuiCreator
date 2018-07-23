@@ -10,6 +10,7 @@ import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.MenuTitles;
 import com.thehutgroup.statics.Statics;
+import com.thehutgroup.testingarea.TestGui;
 import com.thehutgroup.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,6 +39,9 @@ public class MainGui extends JFrame {
     private Color col = new Color(235, 255, 255);
 
     JMenuItem menuItem51;
+
+    private TestGui[] allTestGuis = new TestGui[200];
+    private int testGuiCount = 0;
 
     private MainGui tg = this;
 
@@ -304,11 +308,7 @@ public class MainGui extends JFrame {
         menuItem51.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
-                    try {
-                        runFileChoice();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
+                    runFileChoice();
                 } else {
                     JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before compiling",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
@@ -316,7 +316,7 @@ public class MainGui extends JFrame {
             }
         });
 
-        menuItem51.setEnabled(false);
+        //menuItem51.setEnabled(false);
 
         menuBar.add(menu5);
 
@@ -404,7 +404,7 @@ public class MainGui extends JFrame {
 
     private void resetCompileOptions() {
         menuItem51.setText(MenuTitles.RUN_TEST_GUI);
-        menuItem51.setEnabled(false);
+        //menuItem51.setEnabled(false);
     }
 
     private int saveUnsavedInput() throws IOException {
@@ -473,7 +473,7 @@ public class MainGui extends JFrame {
             testFile = file;
             updateBuiltFile(testFile.getName());
             menuItem51.setText("Run TestGui - " + testFile.getName());
-            menuItem51.setEnabled(false);
+            //menuItem51.setEnabled(false);
             FileUtilities.writeStringToFile(Statics.LAST_SCRIPT, "");
             String allText = FileUtilities.writeFileToString(Statics.RESOURCES_DIR + projectName + "\\" + file.getName());
             comp0.setText(allText);
@@ -502,6 +502,7 @@ public class MainGui extends JFrame {
 
     private void compileFile(String projName, String fileName) throws IOException {
         String allText = comp0.getText();
+        currentText = allText;
         FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
         System.out.println("Creating GUI Properties and Compiling!");
         createGuiProperties(projName, fileName);
@@ -509,11 +510,11 @@ public class MainGui extends JFrame {
         String src = Statics.SCD_RESOURCES_DIR + "TestGui.java.tmp";
         String target = Statics.FINAL_GUI_TARGET_DIR + "TestGui.java";
         FileCopyUtils.copy(new File(src), new File(target));
-        FileCopyUtils.copy(new File(target), new File(Statics.FINAL_GUI_DIR + projName + "\\TestGui.java"));
         FileUtils.deleteQuietly(new File(src));
         if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
             System.out.println("ScriptDirectedGui: ERROR - The file, " + projName + "\\" +fileName + " does not exist in the GUI script source directory - exiting!");
         }
+        menuItem51.setEnabled(true);
     }
 
     private void createGuiProperties(String projectName, String scriptName) {
@@ -525,16 +526,8 @@ public class MainGui extends JFrame {
         gb.buildGuiClass();
     }
 
-    private void runFileChoice() throws IOException {
-        try {
-            String command = Statics.RUN_SCRIPT_NAME + projectName + " " + testFile.getName();
-            System.out.println("The command being run to test the GUI is - " + command);
-            Process buildRun = Runtime.getRuntime().exec(command);
-            JOptionPane.showMessageDialog(tg, "Starting the GUI test - please wait!",
-                TITLE, JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+    private void runFileChoice() {
+        runBuildScript("runScript");
     }
 
     public void updateProjectSelection(String newValue) {
@@ -554,8 +547,8 @@ public class MainGui extends JFrame {
         p1.repaint();
     }
 
-    private Thread runBuildScript(String fileToRun, String project, String branch) {
-        ScriptRunner sr = new ScriptRunner(fileToRun, project, branch);
+    private Thread runBuildScript(String fileToRun) {
+        ScriptRunner sr = new ScriptRunner(fileToRun);
 
         Thread thread = new Thread(sr);
         thread.start();

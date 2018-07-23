@@ -8,16 +8,14 @@ public class ScriptRunner implements Runnable {
     private String project;
     private String branch;
 
-    public ScriptRunner(String file, String proj, String bra) {
+    public ScriptRunner(String file) {
         filename = file;
-        project = proj;
-        branch = bra;
     }
 
     @Override
     public void run() {
         try {
-            String command = "C:\\GradleTutorials\\NewGUICreator\\src\\main\\resources\\" + filename + ".bat " + project + " " + branch;
+            String command = "C:\\GradleTutorials\\NewGUICreator\\src\\main\\resources\\" + filename + ".bat";
             Process buildRun = Runtime.getRuntime().exec(command);
         } catch (IOException ioe) {
             ioe.printStackTrace();

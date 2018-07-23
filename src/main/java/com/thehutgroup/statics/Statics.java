@@ -11,7 +11,7 @@ public class Statics {
     public static final String RESOURCES_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\GuiSourceFiles\\";
     public static final String SCD_RESOURCES_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\src\\main\\resources\\";
     public static final String FINAL_GUI_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\GuiSourceFiles\\";
-    public static final String FINAL_GUI_TARGET_DIR = "C:\\GradleTutorials\\NewGuiCreator\\src\\main\\java\\com\\thehutgroup\\testingarea\\";
+    public static final String FINAL_GUI_TARGET_DIR = "C:\\GradleTutorials\\TestGuiRunner\\src\\main\\java\\com\\thehutgroup\\testgui\\";
     public static final String JAVA_PROJECTS_DIR = "C:\\GradleTutorials\\";
     public static final String TEMPLATE_PROJECT = "TemplateSpringBootProject\\";
     public static final String BASIC_TEMPLATE_PROJECT = "BasicTemplateSpringBootProject\\";

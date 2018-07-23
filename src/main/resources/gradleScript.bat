@@ -1,4 +1,14 @@
 cd\
-cd C:\GradleTutorials\ScriptDirectedGui
-gradlew clean build
-pause
+cd GradleTutorials\TestGuiRunner
+
+set myDirName = ".\build\libs"
+
+if exist myDirName (
+    cd build\libs
+    del *.*
+    cd ..\..
+)
+
+call gradlew clean build
+cd myDirName
+java -jar
