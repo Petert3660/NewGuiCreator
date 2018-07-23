@@ -455,6 +455,7 @@ public class MainGui extends JFrame {
     }
 
     private void compileFile(String projName, String fileName) throws IOException {
+        //syncComponents();
         String allText = comp0.getText();
         FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
         //System.out.println("Creating GUI Properties and Compiling!");
@@ -499,6 +500,16 @@ public class MainGui extends JFrame {
     public void updateBuiltFile(String newValue) {
         comp2.setLabelText(LAST_FILE_BUILT_MESSAGE + newValue);
         p1.repaint();
+    }
+
+    private void syncComponents() throws IOException {
+
+        //This method updates the template project with the latest versions of the Gui Components
+
+        FileUtilities.copyAllFilesFromSrcDirToTargetDir(Statics.JAVA_PROJECTS_DIR + Statics.NEW_GUI_CREATOR_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS,
+            Statics.JAVA_PROJECTS_DIR + Statics.TEMPLATE_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS);
+        FileUtilities.copyAllFilesFromSrcDirToTargetDir(Statics.JAVA_PROJECTS_DIR + Statics.NEW_GUI_CREATOR_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS,
+            Statics.JAVA_PROJECTS_DIR + Statics.TEST_GUI_RUNNER_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS);
     }
 
     private Thread runBuildScript(String fileToRun) {
