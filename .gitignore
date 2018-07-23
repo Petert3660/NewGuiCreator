@@ -7,3 +7,6 @@
 # Build Files
 build/
 
+#Testing Area
+src/main/java/com/thehutgroup/testingarea/
+
