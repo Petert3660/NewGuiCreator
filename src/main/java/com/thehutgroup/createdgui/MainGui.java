@@ -16,8 +16,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import javax.swing.JFileChooser;
@@ -39,8 +37,6 @@ public class MainGui extends JFrame {
     private static final int FRAME_X_SIZE = 1000;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(235, 255, 255);
-
-    JMenuItem menuItem51;
 
     private TestGui[] allTestGuis = new TestGui[200];
     private int testGuiCount = 0;
@@ -66,8 +62,6 @@ public class MainGui extends JFrame {
     private String javaProjectName = "";
     private String comboOptionsFile = "";
     private File testFile;
-
-    private String currentText = "";
 
     private GuiProperties guiProperties;
 
@@ -103,28 +97,6 @@ public class MainGui extends JFrame {
         setUpMenuBar();
           this.setJMenuBar(menuBar);
         this.add(p1);
-
-        comp0.getTextArea().addKeyListener(new KeyListener() {
-
-            @Override
-            public void keyTyped(KeyEvent e) {
-                if (!comp0.getText().equals(currentText)) {
-                    menuItem51.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (!comp0.getText().equals(currentText)) {
-                    menuItem51.setEnabled(false);
-                }            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                if (!comp0.getText().equals(currentText)) {
-                    menuItem51.setEnabled(false);
-                }            }
-        });
     }
 
     private void setUpMenuBar() {
@@ -184,7 +156,6 @@ public class MainGui extends JFrame {
         menuItem02.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 comp0.clearTextArea();
-                resetCompileOptions();
             }
         });
 
@@ -297,26 +268,22 @@ public class MainGui extends JFrame {
         });
 
         JMenu menu5 = new JMenu(MenuTitles.COMPILE_TEST);
-        JMenuItem menuItem50 = new JMenuItem(MenuTitles.COMPILE_TEST_GUI);
+        JMenuItem menuItem50 = new JMenuItem(MenuTitles.RUN_TEST_GUI);
         menu5.add(menuItem50);
-        menuItem51 = new JMenuItem(MenuTitles.RUN_TEST_GUI);
-        menu5.add(menuItem51);
 
         // This is the control for the Compile\Compile and Test Gui menu item
         menuItem50.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
-                    if (StringUtils.isEmpty(comp0.getText()) || comp0.getText().equals(currentText)) {
+                    if (StringUtils.isEmpty(comp0.getText())) {
                         if (StringUtils.isEmpty(comp0.getText())) {
                             JOptionPane.showMessageDialog(tg, "No file selected, or no files in project",
-                                TITLE, JOptionPane.INFORMATION_MESSAGE);
-                        } else if (comp0.getText().equals(currentText)) {
-                            JOptionPane.showMessageDialog(tg, "This code has already been compiled",
                                 TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
                     } else {
                         try {
                             compileFile(projectName, testFile.getName());
+                            runFileChoice();
                         } catch (IOException e1) {
                             e1.printStackTrace();
                         }
@@ -327,19 +294,6 @@ public class MainGui extends JFrame {
                 }
             }
         });
-
-        menuItem51.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (!StringUtils.isEmpty(projectName)) {
-                    runFileChoice();
-                } else {
-                    JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before compiling",
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        });
-
-        menuItem51.setEnabled(false);
 
         menuBar.add(menu5);
 
@@ -425,11 +379,6 @@ public class MainGui extends JFrame {
 
     }
 
-    private void resetCompileOptions() {
-        menuItem51.setText(MenuTitles.RUN_TEST_GUI);
-        menuItem51.setEnabled(false);
-    }
-
     private int saveUnsavedInput() throws IOException {
         int res = 0;
         if (!StringUtils.isEmpty(comp0.getText())) {
@@ -495,8 +444,6 @@ public class MainGui extends JFrame {
             File file = fc.getSelectedFile();
             testFile = file;
             updateBuiltFile(testFile.getName());
-            menuItem51.setText("Run TestGui - " + testFile.getName());
-            menuItem51.setEnabled(false);
             FileUtilities.writeStringToFile(Statics.LAST_SCRIPT, "");
             String allText = FileUtilities.writeFileToString(Statics.RESOURCES_DIR + projectName + "\\" + file.getName());
             comp0.setText(allText);
@@ -509,7 +456,6 @@ public class MainGui extends JFrame {
 
     private void compileFile(String projName, String fileName) throws IOException {
         String allText = comp0.getText();
-        currentText = allText;
         FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
         System.out.println("Creating GUI Properties and Compiling!");
         createGuiProperties(projName, fileName);
@@ -519,11 +465,10 @@ public class MainGui extends JFrame {
         FileCopyUtils.copy(new File(src), new File(target));
         FileUtils.deleteQuietly(new File(src));
         if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
-            System.out.println("ScriptDirectedGui: ERROR - The file, " + projName + "\\" +fileName + " does not exist in the GUI script source directory - exiting!");
-        }
-        JOptionPane.showMessageDialog(tg, "The code has compiled successfully - ready to test!",
+            JOptionPane.showMessageDialog(tg, "ERROR - The file, " + projName + "\\" +fileName + " does not exist in the GUI script source directory - exiting!",
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
-        menuItem51.setEnabled(true);
+            System.exit(0);
+        }
     }
 
     private void createGuiProperties(String projectName, String scriptName) {
