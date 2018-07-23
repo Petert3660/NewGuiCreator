@@ -457,9 +457,9 @@ public class MainGui extends JFrame {
     private void compileFile(String projName, String fileName) throws IOException {
         String allText = comp0.getText();
         FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
-        System.out.println("Creating GUI Properties and Compiling!");
+        //System.out.println("Creating GUI Properties and Compiling!");
         createGuiProperties(projName, fileName);
-        System.out.println("ScriptDirectedGui: Copying compiled GUI in to TestGui class!");
+        //System.out.println("ScriptDirectedGui: Copying compiled GUI in to TestGui class!");
         String src = Statics.SCD_RESOURCES_DIR + "TestGui.java.tmp";
         String target = Statics.FINAL_GUI_TARGET_DIR + "TestGui.java";
         FileCopyUtils.copy(new File(src), new File(target));
@@ -472,7 +472,7 @@ public class MainGui extends JFrame {
     }
 
     private void createGuiProperties(String projectName, String scriptName) {
-        System.out.println("ScriptDirectedGui: This method will run at startup and create the appropriate GUI properties from the input script");
+        //System.out.println("ScriptDirectedGui: This method will run at startup and create the appropriate GUI properties from the input script");
         guiProperties.clearAllArrays();
         GuiScriptParser gsp = new GuiScriptParser(guiProperties);
         gsp.readInputScript(projectName, scriptName);
