@@ -9,6 +9,7 @@ import com.thehutgroup.guicomponents.FreeCheckBox;
 import com.thehutgroup.guicomponents.FreeComboBox;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeLabelComboBoxPair;
+import com.thehutgroup.guicomponents.FreeLabelTextFieldPair;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
 import com.thehutgroup.guis.GuiProperties;
@@ -35,6 +36,8 @@ public class TestGuiScriptParser {
     private static final String TEST_COMBOBOX_OUTPUT = "--Select";
     private static final String TEST_LABELCOMBOBOXPAIR_INPUT = "    FreeLabelComboBoxPair: Please select the project name:, 10, projectNames";
     private static final String TEST_LABELCOMBOBOXPAIR_OUTPUT = "Please select the project name:";
+    private static final String TEST_LABELTEXTFIELDPAIR_INPUT = "    FreeLabelTextFieldPair: Please enter the new branch name:, 10";
+    private static final String TEST_LABELTEXTFIELDPAIR_OUTPUT = "Please enter the new branch name:";
 
     GuiProperties guiProperties = new GuiProperties();
     GuiScriptParser guiScriptParser;
@@ -231,5 +234,33 @@ public class TestGuiScriptParser {
         for (int i = 1; i <= numItems; i++) {
             assertThat(fcb.getComboBox().getItem(i), is("Choice " + i));
         }
+    }
+
+    @Test
+    public void testParseComponents_ComponentsIncluded_LabelTextFieldBoxPair() {
+
+        final String ALT_LABEL_TEXT = "New label text";
+        final String TEST_TEXT = "Blah blah blah";
+
+        ArrayList<String> components = new ArrayList<>();
+        components.add(TEST_LABELTEXTFIELDPAIR_INPUT);
+
+        guiScriptParser.parseComponents(components);
+
+        FreeLabelTextFieldPair ftfp = (FreeLabelTextFieldPair) guiProperties.getComponents().get(0);
+
+        assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
+        assertThat(ftfp.getLabelText(), is(TEST_LABELTEXTFIELDPAIR_OUTPUT));
+
+        ftfp.updateLabelText(ALT_LABEL_TEXT);
+        assertThat(ftfp.getLabelText(), is(ALT_LABEL_TEXT));
+        assertThat(ftfp.empty(), is (true));
+        assertThat(ftfp.getText(), is(""));
+        ftfp.setText(TEST_TEXT);
+        assertThat(ftfp.empty(), is (false));
+        assertThat(ftfp.getText(), is(TEST_TEXT));
+        ftfp.clearTextField();
+        assertThat(ftfp.empty(), is (true));
+        assertThat(ftfp.getText(), is(""));
     }
 }
