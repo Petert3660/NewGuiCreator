@@ -280,5 +280,4 @@ public class GuiScriptParser {
             guiProperties.setSubHeading(input);
         }
     }
-
 }
