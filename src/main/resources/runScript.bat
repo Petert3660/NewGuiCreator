@@ -11,6 +11,6 @@ if exist myDirName (
 
 call gradlew clean build
 cd build\libs
-java -jar TestGuiRunner-1.0.jar
+java -jar TestGuiRunner.jar
 cd ..\..\..\NewGuiCreator\src\main\resources
 
