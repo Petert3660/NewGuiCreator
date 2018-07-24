@@ -10,7 +10,6 @@ import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.MenuTitles;
 import com.thehutgroup.statics.Statics;
-import com.thehutgroup.testingarea.TestGui;
 import com.thehutgroup.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
@@ -37,9 +36,6 @@ public class MainGui extends JFrame {
     private static final int FRAME_X_SIZE = 1000;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(235, 255, 255);
-
-    private TestGui[] allTestGuis = new TestGui[200];
-    private int testGuiCount = 0;
 
     private MainGui tg = this;
 
