@@ -120,13 +120,13 @@ public class GuiScriptParser {
         }
     }
 
-    private void parseMenues(ArrayList<String> menues) {
+    public void parseMenues(ArrayList<String> menues) {
         for (int i = 0; i < menues.size(); i++) {
             guiProperties.getMenues().add(menues.get(i));
         }
     }
 
-    private void parseButtons(ArrayList<String> buttons) {
+    public void parseButtons(ArrayList<String> buttons) {
         for (int i = 0; i < buttons.size(); i++) {
             String input = buttons.get(i).replace("    [", "").replace("],", ""). replace("]", "");
             FreeButton obj = new FreeButton(input, 0, 0);
@@ -134,7 +134,7 @@ public class GuiScriptParser {
         }
     }
 
-    private void parseComponents(ArrayList<String> components) {
+    public void parseComponents(ArrayList<String> components) {
         for (int i = 0; i < components.size(); i++) {
             String input = components.get(i).replace("[", "").replace("],", ""). replace("]", "");
             if (input.contains("FreeCheckBox")) {
@@ -212,7 +212,7 @@ public class GuiScriptParser {
         }
     }
 
-    private ArrayList<String> getComboOptionsFromFile(String input) {
+    public ArrayList<String> getComboOptionsFromFile(String input) {
 
         ArrayList<String> all = new ArrayList<String>();
 
@@ -254,8 +254,7 @@ public class GuiScriptParser {
         return all;
     }
 
-    private void parseLine(String line) {
-
+    public void parseLine(String line) {
         if (line.contains("dimension:")) {
             String input = line.replace("dimension: ", "");
             String[] inputs = input.split(", ");
