@@ -6,7 +6,9 @@ import static org.hamcrest.Matchers.is;
 import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeCheckBox;
+import com.thehutgroup.guicomponents.FreeComboBox;
 import com.thehutgroup.guicomponents.FreeLabel;
+import com.thehutgroup.guicomponents.FreeLabelComboBoxPair;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
 import com.thehutgroup.guis.GuiProperties;
@@ -29,8 +31,12 @@ public class TestGuiScriptParser {
     private static final String TEST_CHECKBOX_OUTPUT  = "Please select if this is to be selected";
     private static final String TEST_TEXTAREA_INPUT = "    FreeTextArea: The output will be shown below:, 200, 950, 200, false";
     private static final String TEST_TEXTAREA_OUTPUT = "The output will be shown below:";
+    private static final String TEST_COMBOBOX_INPUT = "    FreeComboBox: 200, projectNames";
+    private static final String TEST_COMBOBOX_OUTPUT = "--Select";
+    private static final String TEST_LABELCOMBOBOXPAIR_INPUT = "    FreeLabelComboBoxPair: Please select the project name:, 10, projectNames";
+    private static final String TEST_LABELCOMBOBOXPAIR_OUTPUT = "Please select the project name:";
 
-        GuiProperties guiProperties = new GuiProperties();
+    GuiProperties guiProperties = new GuiProperties();
     GuiScriptParser guiScriptParser;
 
     @Before
@@ -170,5 +176,60 @@ public class TestGuiScriptParser {
 
         assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
         assertThat(fcb.getLabelText(), is(TEST_CHECKBOX_OUTPUT));
+    }
+
+    @Test
+    public void testParseComponents_ComponentsIncluded_ComboBox() {
+
+        int numItems = 3;
+        ArrayList<String> items = new ArrayList<>();
+        for (int i = 0; i < numItems; i++) {
+            items.add("Choice " + (i + 1));
+        }
+
+        ArrayList<String> components = new ArrayList<>();
+        components.add(TEST_COMBOBOX_INPUT);
+
+        guiScriptParser.parseComponents(components);
+
+        FreeComboBox fcb = (FreeComboBox) guiProperties.getComponents().get(0);
+
+        assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
+        assertThat(fcb.getItem(0), is(TEST_COMBOBOX_OUTPUT));
+        fcb.clearComboBox();
+        fcb.repopulateComboBox(items);
+        assertThat(fcb.getItem(0), is(TEST_COMBOBOX_OUTPUT));
+        for (int i = 1; i <= numItems; i++) {
+            assertThat(fcb.getItem(i), is("Choice " + i));
+        }
+    }
+
+    @Test
+    public void testParseComponents_ComponentsIncluded_LabelComboBoxPair() {
+
+        int numItems = 3;
+        ArrayList<String> items = new ArrayList<>();
+        for (int i = 0; i < numItems; i++) {
+            items.add("Choice " + (i + 1));
+        }
+
+        ArrayList<String> components = new ArrayList<>();
+        components.add(TEST_LABELCOMBOBOXPAIR_INPUT);
+
+        guiScriptParser.parseComponents(components);
+
+        FreeLabelComboBoxPair fcb = (FreeLabelComboBoxPair) guiProperties.getComponents().get(0);
+
+        assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
+        assertThat(fcb.getLabelText(), is(TEST_LABELCOMBOBOXPAIR_OUTPUT));
+        assertThat(fcb.getComboBox().getItem(0), is(TEST_COMBOBOX_OUTPUT));
+        assertThat(fcb.isFirstItemSelected(), is(true));
+
+        fcb.clearComboBox();
+        fcb.repopulateComboBox(items);
+        assertThat(fcb.getComboBox().getItem(0), is(TEST_COMBOBOX_OUTPUT));
+        for (int i = 1; i <= numItems; i++) {
+            assertThat(fcb.getComboBox().getItem(i), is("Choice " + i));
+        }
     }
 }
