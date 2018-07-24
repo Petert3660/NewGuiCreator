@@ -43,7 +43,7 @@ public class About extends JFrame {
 
         FreeLabel comp0 = new FreeLabel(Statics.MAIN_HEADING, 30, 90, 200, 20);
 
-        FreeLabel comp1 = new FreeLabel(Statics.VERSION, 30, 110, 200, 20);
+        FreeLabel comp1 = new FreeLabel(Statics.VERSION + BuildVersion.getBuildVersion(), 30, 110, 200, 20);
 
         FreeLabel comp2 = new FreeLabel(Statics.COPYRIGHT, 30, 130, 200, 20);
 

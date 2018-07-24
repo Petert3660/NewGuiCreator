@@ -4,7 +4,7 @@ public class Statics {
 
     // Project Constants
     public static final String MAIN_HEADING = "New GUI Script Creator";
-    public static final String VERSION = "Version 1.1";
+    public static final String VERSION = "Version ";
     public static final String COPYRIGHT = "Copyright: Peter Thomson, 2018";
 
     // Project file paths and names

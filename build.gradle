@@ -3,7 +3,7 @@ plugins {
 }
 
 def projectName = "NewNewGuiCreator"
-def version = "1.1"
+def version = "1.11"
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
@@ -31,7 +31,9 @@ jar {
     baseName = "${projectName}"
     version = "${version}"
     manifest {
-        attributes 'Main-Class': 'com.thehutgroup.Application'
+        attributes 'Main-Class': 'com.thehutgroup.Application',
+                   'Implementation-Title': projectName,
+                   'Implementation-Version': version
     }
 }
 
