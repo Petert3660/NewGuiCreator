@@ -1,4 +1,4 @@
-package com.thehutgroup.guicomponents;
+package com.thehutgroup.guis;
 
 import org.springframework.stereotype.Component;
 

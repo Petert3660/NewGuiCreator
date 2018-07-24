@@ -5,7 +5,7 @@ import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeTextArea;
-import com.thehutgroup.guicomponents.GuiProperties;
+import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.MenuTitles;
@@ -455,7 +455,7 @@ public class MainGui extends JFrame {
     }
 
     private void compileFile(String projName, String fileName) throws IOException {
-        //syncComponents();
+        syncComponents();
         String allText = comp0.getText();
         FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
         //System.out.println("Creating GUI Properties and Compiling!");

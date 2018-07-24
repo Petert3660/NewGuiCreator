@@ -11,7 +11,7 @@ import com.thehutgroup.guicomponents.FreeRadioButton;
 import com.thehutgroup.guicomponents.FreeRadioButtonGroup;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
-import com.thehutgroup.guicomponents.GuiProperties;
+import com.thehutgroup.guis.GuiProperties;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;

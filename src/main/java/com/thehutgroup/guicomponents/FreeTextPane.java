@@ -17,5 +17,7 @@ public class FreeTextPane {
     boolean readOnly = false;
     int xSize;
 
-
+    public FreeTextPane(JLabel lab) {
+        this.label = lab;
+    }
 }

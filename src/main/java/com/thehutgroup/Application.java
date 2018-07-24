@@ -1,7 +1,7 @@
 package com.thehutgroup;
 
 import com.thehutgroup.createdgui.MainGui;
-import com.thehutgroup.guicomponents.GuiProperties;
+import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.guis.GuiHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
