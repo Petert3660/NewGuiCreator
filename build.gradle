@@ -2,8 +2,8 @@ plugins {
     id 'org.springframework.boot' version '1.5.9.RELEASE'
 }
 
-group 'com.thehutgroup'
-version '1.0'
+def projectName = "NewNewGuiCreator"
+def version = "1.1"
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
@@ -28,6 +28,8 @@ dependencies {
 }
 
 jar {
+    baseName = "${projectName}"
+    version = "${version}"
     manifest {
         attributes 'Main-Class': 'com.thehutgroup.Application'
     }
