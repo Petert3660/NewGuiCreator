@@ -10,7 +10,11 @@ if exist myDirName (
 )
 
 call gradlew clean build
-cd build\libs
+
+cp c:\GradleTutorials\TestGuiRunner\build\libs\TestGuiRunner.jar c:\PTConsultancy\LocalTestEnvironment\TestGuiRunner
+cd\
+cd c:\PTConsultancy\LocalTestEnvironment\TestGuiRunner
 java -jar TestGuiRunner.jar
+
 cd ..\..\..\NewGuiCreator\src\main\resources
 
