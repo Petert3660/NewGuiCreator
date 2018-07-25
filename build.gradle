@@ -57,10 +57,10 @@ task copyFiles(dependsOn: test) {
         copy {
             from file("${buildDir}/build/libs")
             include "*.jar"
-            into file("${testEnvironment}/${actualprojectName}")
+            into file("${testEnvironment}/${projectName}")
         }
 
-        def runnableFile = "${projectName}.jar"
+        def runnableFile = "${actualprojectName}.jar"
         new File("${testEnvironment}/${projectName}/run.bat").text = """
 start /min java -jar $runnableFile
 """
