@@ -2,7 +2,8 @@ plugins {
     id 'org.springframework.boot' version '2.0.3.RELEASE'
 }
 
-def projectName = "NewNewGUICreator"
+def actualprojectName = "NewNewGUICreator"
+def projectName = "NewGuiCreator"
 def version = "1.11"
 
 def jenkins = "C:/Program Files (x86)/Jenkins/workspace"
@@ -56,7 +57,7 @@ task copyFiles(dependsOn: test) {
         copy {
             from file("${buildDir}/build/libs")
             include "*.jar"
-            into file("${testEnvironment}/${projectName}")
+            into file("${testEnvironment}/${actualprojectName}")
         }
 
         def runnableFile = "${projectName}.jar"
