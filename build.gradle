@@ -5,6 +5,12 @@ plugins {
 def projectName = "NewNewGuiCreator"
 def version = "1.11"
 
+def jenkins = "C:/Program Files (x86)/Jenkins/workspace"
+def testEnvironment = "C:/PTConsultancy/LocalTestEnvironment"
+def testDir = "${testEnvironment}/${projectName}"
+def buildDir = "${jenkins}/${projectName}"
+def localBuildDir = "C:/GradleTutorials/${projectName}"
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
@@ -34,3 +40,28 @@ bootJar {
     }
 }
 
+task setBuildPaths {
+    println "Setting up test environment"
+
+    println "Jenkins directory - ${jenkins}"
+    println "Build directory - ${buildDir}"
+
+    delete fileTree("${testDir}")
+    file("${testDir}").mkdirs()
+}
+
+task copyFiles(dependsOn: test) {
+    doLast {
+        println "Copying files to testEnvironment now"
+        copy {
+            from file("${buildDir}/build/libs")
+            include "*.jar"
+            into file("${testEnvironment}/${projectName}")
+        }
+
+        def runnableFile = "${projectName}.jar"
+        new File("${testEnvironment}/${projectName}/run.bat").text = """
+start /min java -jar $runnableFile
+"""
+    }
+}
