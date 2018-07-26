@@ -4,6 +4,7 @@ import com.thehutgroup.createdgui.BuildVersion;
 import com.thehutgroup.createdgui.MainGui;
 import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.guis.GuiProperties;
+import com.thehutgroup.messages.MessageHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class Application implements CommandLineRunner {
     @Autowired
     GuiProperties guiProperties;
 
+    @Autowired
+    MessageHandler messageHandler;
+
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class)
                 .headless(false)
@@ -39,7 +43,8 @@ public class Application implements CommandLineRunner {
 
     private void testGui() {
         System.out.println("New GUI Creator Running, Version: " + BuildVersion.getBuildVersion());
-        MainGui tmg = new MainGui(guiProperties);
+        System.out.println(messageHandler.getMessage("message.test", new String[]{"by the way"}));
+        MainGui tmg = new MainGui(guiProperties, messageHandler);
         GuiHelper.showFrame(tmg);
     }
 }

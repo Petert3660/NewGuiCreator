@@ -6,12 +6,12 @@ import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeTextArea;
-import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.guis.GuiHelper;
+import com.thehutgroup.guis.GuiProperties;
+import com.thehutgroup.messages.MessageHandler;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.ComponentConstants;
 import com.thehutgroup.statics.InfoMessages;
-import com.thehutgroup.statics.MenuTitles;
 import com.thehutgroup.statics.Statics;
 import com.thehutgroup.statics.WarningMessages;
 import com.thehutgroup.utilities.FileUtilities;
@@ -61,11 +61,13 @@ public class MainGui extends JFrame {
     private File testFile;
 
     private GuiProperties guiProperties;
+    private MessageHandler messageHandler;
 
     @Autowired
-    public MainGui(GuiProperties guiProperties) {
+    public MainGui(GuiProperties guiProperties, MessageHandler messageHandler) {
 
         this.guiProperties = guiProperties;
+        this.messageHandler = messageHandler;
 
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
@@ -97,22 +99,22 @@ public class MainGui extends JFrame {
     }
 
     private void setUpMenuBar() {
-        JMenu menu0 = new JMenu(MenuTitles.FILE);
-        JMenuItem menuItem00 = new JMenuItem(MenuTitles.OPEN_GUI);
+        JMenu menu0 = new JMenu(messageHandler.getMessage("menu.titles.file"));
+        JMenuItem menuItem00 = new JMenuItem(messageHandler.getMessage("menu.titles.file.open.guiscript"));
         menu0.add(menuItem00);
-        JMenuItem menuItem01 = new JMenuItem(MenuTitles.SAVE_GUI);
+        JMenuItem menuItem01 = new JMenuItem(messageHandler.getMessage("menu.titles.file.save.guiscript"));
         menu0.add(menuItem01);
-        JMenuItem menuItem02 = new JMenuItem(MenuTitles.CLOSE_GUI);
+        JMenuItem menuItem02 = new JMenuItem(messageHandler.getMessage("menu.titles.file.close.guiscript"));
         menu0.add(menuItem02);
         menu0.addSeparator();
-        JMenuItem menuItem05 = new JMenuItem(MenuTitles.OPEN_OPTIONS);
+        JMenuItem menuItem05 = new JMenuItem(messageHandler.getMessage("menu.titles.file.open.combooption"));
         menu0.add(menuItem05);
-        JMenuItem menuItem06 = new JMenuItem(MenuTitles.SAVE_OPTIONS);
+        JMenuItem menuItem06 = new JMenuItem(messageHandler.getMessage("menu.titles.file.save.combooption"));
         menu0.add(menuItem06);
-        JMenuItem menuItem07 = new JMenuItem(MenuTitles.CLOSE_OPTIONS);
+        JMenuItem menuItem07 = new JMenuItem(messageHandler.getMessage("menu.titles.file.close.combooption"));
         menu0.add(menuItem07);
         menu0.addSeparator();
-        JMenuItem menuItem04 = new JMenuItem(MenuTitles.EXIT);
+        JMenuItem menuItem04 = new JMenuItem(messageHandler.getMessage("menu.titles.file.exit"));
         menu0.add(menuItem04);
 
         // This is the control for the File\Open File menu item
@@ -205,10 +207,10 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu0);
 
-        JMenu menu1 = new JMenu(MenuTitles.PROJECTS);
-        JMenuItem menuItem10 = new JMenuItem(MenuTitles.CREATE_PROJ);
+        JMenu menu1 = new JMenu(messageHandler.getMessage("menu.titles.project"));
+        JMenuItem menuItem10 = new JMenuItem(messageHandler.getMessage("menu.titles.project.create"));
         menu1.add(menuItem10);
-        JMenuItem menuItem11 = new JMenuItem(MenuTitles.OPEN_PROJ);
+        JMenuItem menuItem11 = new JMenuItem(messageHandler.getMessage("menu.titles.project.open"));
         menu1.add(menuItem11);
 
         // This is the control for the Create New Project\Projects menu item
@@ -228,8 +230,8 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu1);
 
-        JMenu menu2 = new JMenu(MenuTitles.CREATE_SCRIPT);
-        JMenuItem menuItem20 = new JMenuItem(MenuTitles.CREATE_NEW_SCRIPT);
+        JMenu menu2 = new JMenu(messageHandler.getMessage("menu.titles.createscript"));
+        JMenuItem menuItem20 = new JMenuItem(messageHandler.getMessage("menu.titles.createscript.new"));
         menu2.add(menuItem20);
 
         // This is the control for the Create GUI Script\Create New GUI Script menu item
@@ -247,8 +249,8 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu2);
 
-        JMenu menu3 = new JMenu(MenuTitles.CREATE_OPTIONS);
-        JMenuItem menuItem30 = new JMenuItem(MenuTitles.CREATE_NEW_OPTIONS);
+        JMenu menu3 = new JMenu(messageHandler.getMessage("menu.titles.createcombo"));
+        JMenuItem menuItem30 = new JMenuItem(messageHandler.getMessage("menu.titles.createcombo.new"));
         menu3.add(menuItem30);
 
         // This is the control for the Create Combo Options\Create New Combo Options menu item
@@ -266,11 +268,11 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu3);
 
-        JMenu menu4 = new JMenu(MenuTitles.HELP);
-        JMenuItem menuItem40 = new JMenuItem(MenuTitles.HELP_HELP);
+        JMenu menu4 = new JMenu(messageHandler.getMessage("menu.titles.help"));
+        JMenuItem menuItem40 = new JMenuItem(messageHandler.getMessage("menu.titles.help.help"));
         menu4.add(menuItem40);
         menu4.addSeparator();
-        JMenuItem menuItem42 = new JMenuItem(MenuTitles.HELP_ABOUT);
+        JMenuItem menuItem42 = new JMenuItem(messageHandler.getMessage("menu.titles.help.about"));
         menu4.add(menuItem42);
 
         // This is the control for the Help\Help menu item
@@ -280,8 +282,8 @@ public class MainGui extends JFrame {
             }
         });
 
-        JMenu menu5 = new JMenu(MenuTitles.COMPILE_TEST);
-        menuItem50 = new JMenuItem(MenuTitles.RUN_TEST_GUI);
+        JMenu menu5 = new JMenu(messageHandler.getMessage("menu.titles.compile"));
+        menuItem50 = new JMenuItem(messageHandler.getMessage("menu.titles.compile.run"));
         menu5.add(menuItem50);
 
         // This is the control for the Compile & Run\Compile & Run and Test Gui menu item
@@ -310,17 +312,17 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu5);
 
-        JMenu menu6 = new JMenu(MenuTitles.CREATE_COPY);
-        JMenuItem menuItem60 = new JMenuItem(MenuTitles.CREATE_GUI_JAVA);
+        JMenu menu6 = new JMenu(messageHandler.getMessage("menu.titles.copy"));
+        JMenuItem menuItem60 = new JMenuItem(messageHandler.getMessage("menu.titles.copy.createjava"));
         menu6.add(menuItem60);
-        JMenuItem menuItem62 = new JMenuItem(MenuTitles.OPEN_EXISTING_JAVA);
+        JMenuItem menuItem62 = new JMenuItem(messageHandler.getMessage("menu.titles.copy.openexistingjava"));
         menu6.add(menuItem62);
-        JMenuItem menuItem61 = new JMenuItem(MenuTitles.COPY_GUI_JAVA);
+        JMenuItem menuItem61 = new JMenuItem(messageHandler.getMessage("menu.titles.copy.copyjava"));
         menu6.add(menuItem61);
         menu6.addSeparator();
-        JMenuItem menuItem63 = new JMenuItem(MenuTitles.CREATE_SPRINGBOOT);
+        JMenuItem menuItem63 = new JMenuItem(messageHandler.getMessage("menu.titles.copy.createspringboot"));
         menu6.add(menuItem63);
-        JMenuItem menuItem64 = new JMenuItem(MenuTitles.CREATE_SPRINGBOOT_WEB);
+        JMenuItem menuItem64 = new JMenuItem(messageHandler.getMessage("menu.titles.copy.createwebspringboot"));
         menu6.add(menuItem64);
 
         // This is the control for the Create & Copy GUI\Create New GUI Project menu item
