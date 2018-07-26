@@ -9,6 +9,8 @@ import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.runners.ScriptRunner;
+import com.thehutgroup.statics.ComponentConstants;
+import com.thehutgroup.statics.InfoMessages;
 import com.thehutgroup.statics.MenuTitles;
 import com.thehutgroup.statics.Statics;
 import com.thehutgroup.statics.WarningMessages;
@@ -45,7 +47,7 @@ public class MainGui extends JFrame {
 
     private JPanel p1 = new JPanel();
 
-    private FreeTextArea comp0 = new FreeTextArea(col, "Please enter your new script below:", 30, 90, 300, 935, 620, false);
+    private FreeTextArea comp0 = new FreeTextArea(col, ComponentConstants.TEXTAREA_LABEL, 30, 90, 300, 935, 620, false);
 
     private FreeLabel comp1 = new FreeLabel(Statics.PROJECT_SEL_MESSAGE + Statics.NO_PROJ_MESSAGE, 30, 750, 400, 20);
     private FreeLabel comp2 = new FreeLabel(Statics.LAST_FILE_BUILT_MESSAGE, 30, 790, 400, 20);
@@ -119,15 +121,15 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
                         if (openOpenFileChoice("GUI Files", Statics.GUI_EXTENSION) == 0) {
-                            JOptionPane.showMessageDialog(tg, "No file selected, or no files in project",
-                                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(tg, WarningMessages.NO_GUI_FILES,
+                                    TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 } else {
                     JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -137,7 +139,7 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (StringUtils.isEmpty(projectName)) {
                     JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
                         openSaveFileChoice(Statics.GUI_EXTENSION);
@@ -166,16 +168,16 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
-                        if (openOpenFileChoice("Combo Files", Statics.COMBO_OPTIONS_EXTENSION) == 0) {
-                            JOptionPane.showMessageDialog(tg, "No file selected, or no combo options files in project",
-                                    TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        if (openOpenFileChoice(Statics.COMBO_DESC, Statics.COMBO_OPTIONS_EXTENSION) == 0) {
+                            JOptionPane.showMessageDialog(tg, WarningMessages.NO_COMBO_FILES,
+                                    TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 } else {
                     JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -184,7 +186,7 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (StringUtils.isEmpty(projectName)) {
                     JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
                         openSaveFileChoice(Statics.COMBO_OPTIONS_EXTENSION);
@@ -233,7 +235,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create GUI Script\Create New GUI Script menu item
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                comp0.setLabelText("Please enter your new script below:");
+                comp0.setLabelText(ComponentConstants.TEXTAREA_LABEL);
                 p1.repaint();
                 try {
                     int res = saveUnsavedInput();
@@ -252,7 +254,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create Combo Options\Create New Combo Options menu item
         menuItem30.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                comp0.setLabelText("Please list your new combo options below:");
+                comp0.setLabelText(ComponentConstants.TEXTAREA_LABEL_COMBO);
                 p1.repaint();
                 try {
                     int res = saveUnsavedInput();
@@ -288,8 +290,8 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     if (StringUtils.isEmpty(comp0.getText())) {
                         if (StringUtils.isEmpty(comp0.getText())) {
-                            JOptionPane.showMessageDialog(tg, "No file selected, or no files in project",
-                                TITLE, JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(tg, WarningMessages.NO_FILES,
+                                TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
                         try {
@@ -300,8 +302,8 @@ public class MainGui extends JFrame {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before compiling",
-                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_JAVA_PROJECT_SELECTED_COMPILE,
+                            TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
@@ -339,15 +341,15 @@ public class MainGui extends JFrame {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    JOptionPane.showMessageDialog(tg, "TestGui.java has been successfully copied to the " + javaProjectName + " project",
+                    JOptionPane.showMessageDialog(tg, InfoMessages.messageBuilder(javaProjectName, 0),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     if (StringUtils.isEmpty(javaProjectName)) {
-                        JOptionPane.showMessageDialog(tg, "No Java project currently selected - select/create a Java project before copying",
-                                TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, WarningMessages.NO_JAVA_PROJECT_SELECTED_COPY,
+                                TITLE, JOptionPane.WARNING_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(tg, "No recently built script - build a script before copying",
-                                TITLE, JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(tg, WarningMessages.NO_RECENT_SCRIPT,
+                                TITLE, JOptionPane.WARNING_MESSAGE);
                     }
                 }
             }
@@ -394,7 +396,7 @@ public class MainGui extends JFrame {
         int res = 0;
         if (!StringUtils.isEmpty(comp0.getText())) {
             res = JOptionPane.showConfirmDialog(tg,
-                    "There is potentially unsaved material in your text area - do you wish to save this before continuing?",
+                    WarningMessages.UNSAVED_MATERIAL,
                     TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 1) {
                 comp0.clearTextArea();
@@ -435,7 +437,7 @@ public class MainGui extends JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
-        int returnVal = fc.showDialog(tg, "Select Project");
+        int returnVal = fc.showDialog(tg, ComponentConstants.FILECHOOSER_SEL_PROJ_APPROVE_BUTTON);
 
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
@@ -490,7 +492,7 @@ public class MainGui extends JFrame {
         FileCopyUtils.copy(new File(src), new File(target));
         FileUtils.deleteQuietly(new File(src));
         if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
-            JOptionPane.showMessageDialog(tg, "ERROR - The file, " + projName + "\\" +fileName + " does not exist in the GUI script source directory - exiting!",
+            JOptionPane.showMessageDialog(tg, InfoMessages.messageBuilder(projName + "\\" +fileName, 1),
                 TITLE, JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);
         }
