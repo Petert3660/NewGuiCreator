@@ -11,6 +11,7 @@ import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.MenuTitles;
 import com.thehutgroup.statics.Statics;
+import com.thehutgroup.statics.WarningMessages;
 import com.thehutgroup.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
@@ -130,7 +131,7 @@ public class MainGui extends JFrame {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before opening a file",
+                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -139,8 +140,9 @@ public class MainGui extends JFrame {
         // This is the control for the File\Save File menu item
         menuItem01.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (comp1.getLabelText().equals(NO_PROJ_MESSAGE)) {
-
+                if (StringUtils.isEmpty(projectName)) {
+                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     try {
                         openSaveFileChoice(Statics.GUI_EXTENSION);
@@ -177,7 +179,7 @@ public class MainGui extends JFrame {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before opening a file",
+                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -185,8 +187,9 @@ public class MainGui extends JFrame {
 
         menuItem06.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (comp1.getLabelText().equals(NO_PROJ_MESSAGE)) {
-
+                if (StringUtils.isEmpty(projectName)) {
+                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     try {
                         openSaveFileChoice(Statics.COMBO_OPTIONS_EXTENSION);
