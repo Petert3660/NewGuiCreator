@@ -10,7 +10,6 @@ import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.messages.MessageHandler;
 import com.thehutgroup.runners.ScriptRunner;
-import com.thehutgroup.statics.ComponentConstants;
 import com.thehutgroup.statics.InfoMessages;
 import com.thehutgroup.statics.Statics;
 import com.thehutgroup.statics.WarningMessages;
@@ -47,7 +46,7 @@ public class MainGui extends JFrame {
 
     private JPanel p1 = new JPanel();
 
-    private FreeTextArea comp0 = new FreeTextArea(col, ComponentConstants.TEXTAREA_LABEL, 30, 90, 300, 935, 620, false);
+    private FreeTextArea comp0 = new FreeTextArea(col, null, 30, 90, 300, 935, 620, false);
 
     private FreeLabel comp1 = new FreeLabel(Statics.PROJECT_SEL_MESSAGE + Statics.NO_PROJ_MESSAGE, 30, 750, 400, 20);
     private FreeLabel comp2 = new FreeLabel(Statics.LAST_FILE_BUILT_MESSAGE, 30, 790, 400, 20);
@@ -68,6 +67,8 @@ public class MainGui extends JFrame {
 
         this.guiProperties = guiProperties;
         this.messageHandler = messageHandler;
+
+        comp0.setLabelText(messageHandler.getMessage("textarea.label"));
 
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
@@ -237,7 +238,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create GUI Script\Create New GUI Script menu item
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                comp0.setLabelText(ComponentConstants.TEXTAREA_LABEL);
+                comp0.setLabelText(messageHandler.getMessage("textarea.label"));
                 p1.repaint();
                 try {
                     int res = saveUnsavedInput();
@@ -256,7 +257,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create Combo Options\Create New Combo Options menu item
         menuItem30.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                comp0.setLabelText(ComponentConstants.TEXTAREA_LABEL_COMBO);
+                comp0.setLabelText(messageHandler.getMessage("textarea.label.combo"));
                 p1.repaint();
                 try {
                     int res = saveUnsavedInput();
@@ -439,7 +440,7 @@ public class MainGui extends JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
-        int returnVal = fc.showDialog(tg, ComponentConstants.FILECHOOSER_SEL_PROJ_APPROVE_BUTTON);
+        int returnVal = fc.showDialog(tg,messageHandler.getMessage("filechooser.approve.button.selectproject"));
 
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
