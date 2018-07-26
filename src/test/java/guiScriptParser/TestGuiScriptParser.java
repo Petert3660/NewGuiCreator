@@ -2,6 +2,7 @@ package guiScriptParser;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
@@ -41,6 +42,10 @@ public class TestGuiScriptParser {
     private static final String TEST_LABELTEXTFIELDPAIR_OUTPUT = "Please enter the new branch name:";
     private static final String TEST_LABELTEXTBUTTONTRIPLE_INPUT = "    FreeLabelTextButtonTriple: Please enter a file name:, 10, Clear";
     private static final String TEST_LABELTEXTBUTTONTRIPLE_OUTPUT = "Please enter a file name:";
+    private static final String TEST_LINE_COLOR = "backgroundcolor: value=235, 255, 255";
+    private static final String TEST_LINE_DIM = "dimension: xsize=1000, ysize=900";
+    private static final String TEST_LINE_HEADING = "heading: value=Example Dashboard";
+    private static final String TEST_LINE_SUBHEADING = "subheading: value=Main Dashboard";
 
     GuiProperties guiProperties = new GuiProperties();
     GuiScriptParser guiScriptParser;
@@ -295,5 +300,41 @@ public class TestGuiScriptParser {
         assertThat(ftfp.getButtonText(), is("Clear"));
         ftfp.updateButtonText("Close");
         assertThat(ftfp.getButtonText(), is("Close"));
+    }
+
+    @Test
+    public void testParseLine_color() {
+
+        String line = TEST_LINE_COLOR;
+
+        guiScriptParser.parseLine(line);
+
+        assertThat(guiProperties.getGuiBackgroundColor(), notNullValue());
+        assertThat(guiProperties.getGuiBackgroundColor().getRed(), is(235));
+        assertThat(guiProperties.getGuiBackgroundColor().getGreen(), is(255));
+        assertThat(guiProperties.getGuiBackgroundColor().getBlue(), is(255));
+    }
+
+    @Test
+    public void testParseLine_dimesion() {
+
+        String line = TEST_LINE_DIM;
+
+        guiScriptParser.parseLine(line);
+
+        assertThat(guiProperties.getFrameXSize(), is(1000));
+        assertThat(guiProperties.getFrameYSize(), is(900));
+    }
+
+    @Test
+    public void testParseLine_headings() {
+
+        String line = TEST_LINE_HEADING;
+        guiScriptParser.parseLine(line);
+        line = TEST_LINE_SUBHEADING;
+        guiScriptParser.parseLine(line);
+
+        assertThat(guiProperties.getMainHeading(), is("Example Dashboard"));
+        assertThat(guiProperties.getSubHeading(), is("Main Dashboard"));
     }
 }
