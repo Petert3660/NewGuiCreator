@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 public class About extends JFrame {
 
     private static final String SUB_HEADING = "About";
-    private static final String TITLE = Statics.MAIN_HEADING + " - " + SUB_HEADING;
+    private static final String TITLE = SUB_HEADING;
     private static final int FRAME_X_SIZE = 400;
     private static final int FRAME_Y_SIZE = 300;
     private Color col = new Color(230, 255, 255);
@@ -62,6 +62,5 @@ public class About extends JFrame {
         p1.add(comp2);
         p1.add(l0);
         this.add(p1);
-
     }
 }

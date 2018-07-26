@@ -207,6 +207,5 @@ public class NewProjectGui extends JFrame {
         p1.add(comp0.getPanel());
         p1.add(l0);
         this.add(p1);
-
     }
 }
