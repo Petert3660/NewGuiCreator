@@ -143,7 +143,7 @@ public class MainGui extends JFrame {
 
                 } else {
                     try {
-                        openSaveFileChoice();
+                        openSaveFileChoice(Statics.GUI_EXTENSION);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -179,6 +179,20 @@ public class MainGui extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(tg, "No project currently selected - select/create a project before opening a file",
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        });
+
+        menuItem06.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (comp1.getLabelText().equals(NO_PROJ_MESSAGE)) {
+
+                } else {
+                    try {
+                        openSaveFileChoice(Statics.COMBO_OPTIONS_EXTENSION);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
@@ -387,27 +401,35 @@ public class MainGui extends JFrame {
             if (res == 1) {
                 comp0.clearTextArea();
             } else {
-                openSaveFileChoice();
+                openSaveFileChoice(Statics.GUI_EXTENSION);
             }
         }
         return res;
     }
 
-    private void openSaveFileChoice() throws IOException {
+    private void openSaveFileChoice(String extension) throws IOException {
         JFileChooser fc = new JFileChooser();
         if (!StringUtils.isEmpty(projectName)) {
             fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR + projectName));
         } else {
             fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
         }
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("GUI Files","gui");
+        if (extension.equals(Statics.GUI_EXTENSION)) {
+            openAndSaveToCorrectFileType(fc, extension, "GUI Files");
+        } else if (extension.equals(Statics.COMBO_OPTIONS_EXTENSION)) {
+            openAndSaveToCorrectFileType(fc, extension, "Combo Files");
+        }
+    }
+
+    private void openAndSaveToCorrectFileType(JFileChooser fc, String extension, String desc) throws IOException {
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(desc, extension.replace(".", ""));
         fc.setFileFilter(filter);
         int returnVal = fc.showSaveDialog(tg);
         if (returnVal == 0) {
-            String filename = fc.getSelectedFile().getName().replace(Statics.GUI_EXTENSION, "");
+            String filename = fc.getSelectedFile().getName().replace(Statics.COMBO_OPTIONS_EXTENSION, "");
             String allText = comp0.getText();
             FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + filename
-                    + Statics.GUI_EXTENSION, allText);
+                + Statics.COMBO_OPTIONS_EXTENSION, allText);
         }
     }
 

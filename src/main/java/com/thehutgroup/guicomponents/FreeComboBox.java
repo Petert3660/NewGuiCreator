@@ -12,7 +12,6 @@ public class FreeComboBox extends JComboBox {
 
     public FreeComboBox(int x, int y, int xSize, int ySize, ArrayList<String> items) {
             this.setBounds(x, y, xSize, ySize);
-            this.addItem("--Select");
             if (items != null) {
                 for (String item : items) {
                     this.addItem(item);
@@ -38,7 +37,6 @@ public class FreeComboBox extends JComboBox {
 
         public void repopulateComboBox(ArrayList<String> items) {
             this.removeAllItems();
-            this.addItem("--Select");
             for (String item : items) {
                 this.addItem(item);
         }

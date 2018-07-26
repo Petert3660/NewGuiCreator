@@ -11,11 +11,9 @@ public class FreeLabelComboBoxPair {
     FreeLabel label;
     FreeComboBox comboBox;
     JPanel panel;
-    ArrayList<String> items;
 
     public FreeLabelComboBoxPair(Color col, String value, int x, int y, int xSize, ArrayList<String> items) {
         this.col = col;
-        this.items = items;
         label = new FreeLabel(value, 0, 0, xSize, 20);
         comboBox = new FreeComboBox(xSize + 10, 0, 200, 20, items);
         setupContainingPanel(x, y, xSize, 220);
@@ -23,7 +21,6 @@ public class FreeLabelComboBoxPair {
 
     public FreeLabelComboBoxPair(Color col, String value, int x, int y, int xSize, int fieldSize, ArrayList<String> items) {
         this.col = col;
-        this.items = items;
         label = new FreeLabel(value, 0, 0, xSize, 20);
         comboBox = new FreeComboBox(xSize + 10, 0, fieldSize, 20, items);
         setupContainingPanel(x, y, xSize, fieldSize);
@@ -64,8 +61,6 @@ public class FreeLabelComboBoxPair {
     }
 
     public String getLabelText() { return label.getText(); }
-
-    public ArrayList<String> getItems() { return items; }
 
     public FreeComboBox getComboBox() {
         return comboBox;
