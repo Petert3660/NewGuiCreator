@@ -33,5 +33,8 @@ public class Statics {
     public static final String GUI_EXTENSION = ".gui";
     public static final String COMBO_OPTIONS_EXTENSION = ".combo";
 
+    public static final String GUI_DESC = "GUI Files";
+    public static final String COMBO_DESC = "Combo Files";
+
     public static final int EXIT_STATUS = 0;
 }

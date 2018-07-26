@@ -415,9 +415,9 @@ public class MainGui extends JFrame {
             fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
         }
         if (extension.equals(Statics.GUI_EXTENSION)) {
-            openAndSaveToCorrectFileType(fc, extension, "GUI Files");
+            openAndSaveToCorrectFileType(fc, extension, Statics.GUI_DESC);
         } else if (extension.equals(Statics.COMBO_OPTIONS_EXTENSION)) {
-            openAndSaveToCorrectFileType(fc, extension, "Combo Files");
+            openAndSaveToCorrectFileType(fc, extension, Statics.COMBO_DESC);
         }
     }
 
