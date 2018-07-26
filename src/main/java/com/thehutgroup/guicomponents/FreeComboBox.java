@@ -5,15 +5,12 @@ import java.util.ArrayList;
 
 public class FreeComboBox extends JComboBox {
 
-    private ArrayList<String> items = new ArrayList<>();
-
     public FreeComboBox(int x, int y, int xSize, int ySize) {
         this.setBounds(x, y, xSize, ySize);
         this.addItem("--Select");
     }
 
     public FreeComboBox(int x, int y, int xSize, int ySize, ArrayList<String> items) {
-            this.items = items;
             this.setBounds(x, y, xSize, ySize);
             this.addItem("--Select");
             if (items != null) {
@@ -46,6 +43,4 @@ public class FreeComboBox extends JComboBox {
                 this.addItem(item);
         }
     }
-
-    public ArrayList<String> getItems() { return items; }
 }

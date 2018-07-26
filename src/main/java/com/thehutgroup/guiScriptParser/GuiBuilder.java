@@ -229,8 +229,8 @@ public class GuiBuilder {
                 } else if (guiProperties.getComponents().get(i) instanceof FreeComboBox) {
                     String items = "items" + String.valueOf(itemsIndex++);
                     bw.write("        ArrayList<String> " + items + " = new ArrayList<String>();\n");
-                    for (int j = 0; j < ((FreeComboBox) guiProperties.getComponents().get(i)).getItems().size(); j++) {
-                        bw.write("        " + items + ".add(\"" + ((FreeComboBox) guiProperties.getComponents().get(i)).getItems().get(j) + "\");\n");
+                    for (int j = 0; j < ((FreeComboBox) guiProperties.getComponents().get(i)).getItemCount(); j++) {
+                        bw.write("        " + items + ".add(\"" + ((FreeComboBox) guiProperties.getComponents().get(i)).getItemAt(j) + "\");\n");
                     }
                     bw.write("        FreeComboBox " + component + " = new FreeComboBox("
                             + (int) ((FreeComboBox) guiProperties.getComponents().get(i)).getBounds().getX() + ", "
