@@ -54,6 +54,8 @@ public class MainGui extends JFrame {
     private FreeLabel comp2 = new FreeLabel(LAST_FILE_BUILT_MESSAGE, 30, 790, 400, 20);
     private FreeLabel comp3 = new FreeLabel(JAVA_PROJ_SEL_MESSAGE + NO_PROJ_MESSAGE, 30, 770, 400, 20);
 
+    JMenuItem menuItem50;
+
     private String projectName = "";
     private String javaProjectName = "";
     private String comboOptionsFile = "";
@@ -119,7 +121,7 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
-                        if (openOpenFileChoice("GUI Files", "gui") == 0) {
+                        if (openOpenFileChoice("GUI Files", Statics.GUI_EXTENSION) == 0) {
                             JOptionPane.showMessageDialog(tg, "No file selected, or no files in project",
                                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -166,7 +168,7 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
-                        if (openOpenFileChoice("Combo Files", "combo") == 0) {
+                        if (openOpenFileChoice("Combo Files", Statics.COMBO_OPTIONS_EXTENSION) == 0) {
                             JOptionPane.showMessageDialog(tg, "No file selected, or no combo options files in project",
                                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                         }
@@ -264,10 +266,10 @@ public class MainGui extends JFrame {
         });
 
         JMenu menu5 = new JMenu(MenuTitles.COMPILE_TEST);
-        JMenuItem menuItem50 = new JMenuItem(MenuTitles.RUN_TEST_GUI);
+        menuItem50 = new JMenuItem(MenuTitles.RUN_TEST_GUI);
         menu5.add(menuItem50);
 
-        // This is the control for the Compile\Compile and Test Gui menu item
+        // This is the control for the Compile & Run\Compile & Run and Test Gui menu item
         menuItem50.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
@@ -424,7 +426,7 @@ public class MainGui extends JFrame {
         int numberOfFiles = 0;
         JFileChooser fc = new JFileChooser();
         //fc.getFileSelectionMode(JFileChooser.);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter(desc,extension);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(desc, extension.replace(".", ""));
         fc.setFileFilter(filter);
         if (!StringUtils.isEmpty(projectName)) {
             File file = new File(Statics.RESOURCES_DIR + projectName);
@@ -443,6 +445,11 @@ public class MainGui extends JFrame {
             FileUtilities.writeStringToFile(Statics.LAST_SCRIPT, "");
             String allText = FileUtilities.writeFileToString(Statics.RESOURCES_DIR + projectName + "\\" + file.getName());
             comp0.setText(allText);
+            if (extension.equals(Statics.GUI_EXTENSION)) {
+                menuItem50.setEnabled(true);
+            } else if (extension.equals(Statics.COMBO_OPTIONS_EXTENSION)) {
+                menuItem50.setEnabled(false);
+            }
         } else {
             numberOfFiles = 0;
         }

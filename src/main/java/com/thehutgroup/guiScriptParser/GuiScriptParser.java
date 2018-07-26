@@ -12,6 +12,7 @@ import com.thehutgroup.guicomponents.FreeRadioButtonGroup;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
 import com.thehutgroup.guis.GuiProperties;
+import com.thehutgroup.statics.Statics;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -219,7 +220,7 @@ public class GuiScriptParser {
         // The name of the file to open.
         //Path currentRelativePath = Paths.get("");
         //String currentDir = currentRelativePath.toAbsolutePath().toString();
-        String fileName = RESOURCES_DIR + projectName + "\\" + input;
+        String fileName = RESOURCES_DIR + projectName + "\\" + input + Statics.COMBO_OPTIONS_EXTENSION;
 
         // This will reference one line at a time
         String line = null;
