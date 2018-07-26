@@ -47,14 +47,9 @@ public class MainGui extends JFrame {
 
     private FreeTextArea comp0 = new FreeTextArea(col, "Please enter your new script below:", 30, 90, 300, 935, 620, false);
 
-    private static final String PROJECT_SEL_MESSAGE = "Project selected: ";
-    private static final String JAVA_PROJ_SEL_MESSAGE = "Java Project selected: ";
-    private static final String NO_PROJ_MESSAGE = "There is currently no project selected";
-    private static final String LAST_FILE_BUILT_MESSAGE = "The selected script file is: ";
-
-    private FreeLabel comp1 = new FreeLabel(PROJECT_SEL_MESSAGE + NO_PROJ_MESSAGE, 30, 750, 400, 20);
-    private FreeLabel comp2 = new FreeLabel(LAST_FILE_BUILT_MESSAGE, 30, 790, 400, 20);
-    private FreeLabel comp3 = new FreeLabel(JAVA_PROJ_SEL_MESSAGE + NO_PROJ_MESSAGE, 30, 770, 400, 20);
+    private FreeLabel comp1 = new FreeLabel(Statics.PROJECT_SEL_MESSAGE + Statics.NO_PROJ_MESSAGE, 30, 750, 400, 20);
+    private FreeLabel comp2 = new FreeLabel(Statics.LAST_FILE_BUILT_MESSAGE, 30, 790, 400, 20);
+    private FreeLabel comp3 = new FreeLabel(Statics.JAVA_PROJ_SEL_MESSAGE + Statics.NO_PROJ_MESSAGE, 30, 770, 400, 20);
 
     JMenuItem menuItem50;
 
@@ -520,18 +515,18 @@ public class MainGui extends JFrame {
 
     public void updateProjectSelection(String newValue) {
         projectName = newValue;
-        comp1.setLabelText(PROJECT_SEL_MESSAGE + newValue);
+        comp1.setLabelText(Statics.PROJECT_SEL_MESSAGE + newValue);
         p1.repaint();
     }
 
     public void updateJavaProjectSelection(String value) {
         javaProjectName = value;
-        comp3.setLabelText(PROJECT_SEL_MESSAGE + value);
+        comp3.setLabelText(Statics.PROJECT_SEL_MESSAGE + value);
         p1.repaint();
     }
 
     public void updateBuiltFile(String newValue) {
-        comp2.setLabelText(LAST_FILE_BUILT_MESSAGE + newValue);
+        comp2.setLabelText(Statics.LAST_FILE_BUILT_MESSAGE + newValue);
         p1.repaint();
     }
 

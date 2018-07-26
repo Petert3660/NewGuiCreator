@@ -7,6 +7,11 @@ public class Statics {
     public static final String VERSION = "Version ";
     public static final String COPYRIGHT = "Copyright: Peter Thomson, 2018";
 
+    public static final String PROJECT_SEL_MESSAGE = "Project selected: ";
+    public static final String JAVA_PROJ_SEL_MESSAGE = "Java Project selected: ";
+    public static final String NO_PROJ_MESSAGE = "There is currently no project selected";
+    public static final String LAST_FILE_BUILT_MESSAGE = "The selected script file is: ";
+
     // Project file paths and names
     public static final String RESOURCES_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\GuiSourceFiles\\";
     public static final String SCD_RESOURCES_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\src\\main\\resources\\";
