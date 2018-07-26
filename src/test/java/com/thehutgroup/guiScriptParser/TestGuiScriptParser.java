@@ -1,11 +1,10 @@
-package guiScriptParser;
+package com.thehutgroup.guiScriptParser;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
 import com.thehutgroup.exceptions.ComboBoxItemsFileException;
-import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeCheckBox;
 import com.thehutgroup.guicomponents.FreeLabel;
