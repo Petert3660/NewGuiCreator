@@ -74,4 +74,6 @@ public class FreeLabelTextButtonTriple {
     public FreeButton getButton() {
         return button;
     }
+
+    public void updateButtonText(String input) { button.setText(input);}
 }

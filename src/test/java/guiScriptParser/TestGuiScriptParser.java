@@ -9,6 +9,7 @@ import com.thehutgroup.guicomponents.FreeCheckBox;
 import com.thehutgroup.guicomponents.FreeComboBox;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeLabelComboBoxPair;
+import com.thehutgroup.guicomponents.FreeLabelTextButtonTriple;
 import com.thehutgroup.guicomponents.FreeLabelTextFieldPair;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
@@ -38,6 +39,8 @@ public class TestGuiScriptParser {
     private static final String TEST_LABELCOMBOBOXPAIR_OUTPUT = "Please select the project name:";
     private static final String TEST_LABELTEXTFIELDPAIR_INPUT = "    FreeLabelTextFieldPair: Please enter the new branch name:, 10";
     private static final String TEST_LABELTEXTFIELDPAIR_OUTPUT = "Please enter the new branch name:";
+    private static final String TEST_LABELTEXTBUTTONTRIPLE_INPUT = "    FreeLabelTextButtonTriple: Please enter a file name:, 10, Clear";
+    private static final String TEST_LABELTEXTBUTTONTRIPLE_OUTPUT = "Please enter a file name:";
 
     GuiProperties guiProperties = new GuiProperties();
     GuiScriptParser guiScriptParser;
@@ -237,7 +240,7 @@ public class TestGuiScriptParser {
     }
 
     @Test
-    public void testParseComponents_ComponentsIncluded_LabelTextFieldBoxPair() {
+    public void testParseComponents_ComponentsIncluded_LabelTextFieldPair() {
 
         final String ALT_LABEL_TEXT = "New label text";
         final String TEST_TEXT = "Blah blah blah";
@@ -262,5 +265,35 @@ public class TestGuiScriptParser {
         ftfp.clearTextField();
         assertThat(ftfp.empty(), is (true));
         assertThat(ftfp.getText(), is(""));
+    }
+
+    @Test
+    public void testParseComponents_ComponentsIncluded_LabelTextFieldButtonTriple() {
+
+        final String ALT_LABEL_TEXT = "New label text";
+        final String TEST_TEXT = "Blah blah blah";
+
+        ArrayList<String> components = new ArrayList<>();
+        components.add(TEST_LABELTEXTBUTTONTRIPLE_INPUT);
+
+        guiScriptParser.parseComponents(components);
+
+        FreeLabelTextButtonTriple ftfp = (FreeLabelTextButtonTriple) guiProperties.getComponents().get(0);
+
+        assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
+        assertThat(ftfp.getLabelText(), is(TEST_LABELTEXTBUTTONTRIPLE_OUTPUT));
+        assertThat(ftfp.getText(), is (""));
+        assertThat(ftfp.empty(), is (true));
+
+        ftfp.updateLabelText(ALT_LABEL_TEXT);
+        assertThat(ftfp.getLabelText(), is(ALT_LABEL_TEXT));
+        ftfp.setText(TEST_TEXT);
+        assertThat(ftfp.getText(), is (TEST_TEXT));
+        ftfp.clearTextField();
+        assertThat(ftfp.getText(), is (""));
+        assertThat(ftfp.empty(), is (true));
+        assertThat(ftfp.getButtonText(), is("Clear"));
+        ftfp.updateButtonText("Close");
+        assertThat(ftfp.getButtonText(), is("Close"));
     }
 }
