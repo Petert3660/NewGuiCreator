@@ -10,7 +10,6 @@ import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.messages.MessageHandler;
 import com.thehutgroup.runners.ScriptRunner;
-import com.thehutgroup.statics.InfoMessages;
 import com.thehutgroup.statics.Statics;
 import com.thehutgroup.statics.WarningMessages;
 import com.thehutgroup.utilities.FileUtilities;
@@ -344,7 +343,7 @@ public class MainGui extends JFrame {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    JOptionPane.showMessageDialog(tg, InfoMessages.messageBuilder(javaProjectName, 0),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.info.javacopysuccess", new String[]{javaProjectName}),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     if (StringUtils.isEmpty(javaProjectName)) {
@@ -495,8 +494,8 @@ public class MainGui extends JFrame {
         FileCopyUtils.copy(new File(src), new File(target));
         FileUtils.deleteQuietly(new File(src));
         if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
-            JOptionPane.showMessageDialog(tg, InfoMessages.messageBuilder(projName + "\\" +fileName, 1),
-                TITLE, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.error.missingscriptfile", new String[]{projName + "\\" + fileName}),
+                TITLE, JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
     }
