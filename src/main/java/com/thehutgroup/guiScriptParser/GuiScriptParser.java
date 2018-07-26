@@ -1,5 +1,7 @@
 package com.thehutgroup.guiScriptParser;
 
+import com.thehutgroup.exceptions.ComboBoxItemsFileException;
+import com.thehutgroup.exceptions.GuiScriptFileException;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeCheckBox;
 import com.thehutgroup.guicomponents.FreeComboBox;
@@ -36,7 +38,7 @@ public class GuiScriptParser {
         this.guiProperties = guiProperties;
     }
 
-    public void readInputScript(String projectName, String scriptName) {
+    public void readInputScript(String projectName, String scriptName) throws GuiScriptFileException {
 
         this.projectName = projectName;
 
@@ -92,7 +94,11 @@ public class GuiScriptParser {
                             if (line.contains("buttons:")) {
                                 buttonsFlag = true;
                                 componentsFlag = false;
-                                parseComponents(components);
+                                try {
+                                    parseComponents(components);
+                                } catch (ComboBoxItemsFileException e) {
+                                    e.printStackTrace();
+                                }
                             } else {
                                 components.add(line);
                             }
@@ -108,16 +114,12 @@ public class GuiScriptParser {
             bufferedReader.close();
         }
         catch(FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
+            throw new GuiScriptFileException("Unable to open file '" +
+                fileName + "'");
         }
         catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '"
-                            + fileName + "'");
-            // Or we could just do this:
-            // ex.printStackTrace();
+            throw new GuiScriptFileException("Error reading file '"
+                + fileName + "'");
         }
     }
 
@@ -135,7 +137,7 @@ public class GuiScriptParser {
         }
     }
 
-    public void parseComponents(ArrayList<String> components) {
+    public void parseComponents(ArrayList<String> components) throws ComboBoxItemsFileException {
         for (int i = 0; i < components.size(); i++) {
             String input = components.get(i).replace("[", "").replace("],", ""). replace("]", "");
             if (input.contains("FreeCheckBox")) {
@@ -213,7 +215,7 @@ public class GuiScriptParser {
         }
     }
 
-    public ArrayList<String> getComboOptionsFromFile(String input) {
+    public ArrayList<String> getComboOptionsFromFile(String input) throws ComboBoxItemsFileException {
 
         ArrayList<String> all = new ArrayList<String>();
 
@@ -240,16 +242,12 @@ public class GuiScriptParser {
             bufferedReader.close();
         }
         catch(FileNotFoundException ex) {
-            System.out.println(
-                    "Unable to open file '" +
-                            fileName + "'");
+            throw new ComboBoxItemsFileException("Unable to open file '" +
+                fileName + "'");
         }
         catch(IOException ex) {
-            System.out.println(
-                    "Error reading file '"
-                            + fileName + "'");
-            // Or we could just do this:
-            // ex.printStackTrace();
+            throw new ComboBoxItemsFileException("Error reading file '"
+                + fileName + "'");
         }
 
         return all;

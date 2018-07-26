@@ -4,12 +4,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
+import com.thehutgroup.exceptions.ComboBoxItemsFileException;
 import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeCheckBox;
-import com.thehutgroup.guicomponents.FreeComboBox;
 import com.thehutgroup.guicomponents.FreeLabel;
-import com.thehutgroup.guicomponents.FreeLabelComboBoxPair;
 import com.thehutgroup.guicomponents.FreeLabelTextButtonTriple;
 import com.thehutgroup.guicomponents.FreeLabelTextFieldPair;
 import com.thehutgroup.guicomponents.FreeTextArea;
@@ -104,7 +103,11 @@ public class TestGuiScriptParser {
 
         ArrayList<String> components = new ArrayList<>();
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ZERO));
     }
@@ -115,7 +118,11 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_LABEL_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         FreeLabel fl = (FreeLabel) guiProperties.getComponents().get(0);
 
@@ -129,7 +136,11 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_TEXTFIELD_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         FreeTextField ftf = (FreeTextField) guiProperties.getComponents().get(0);
 
@@ -149,7 +160,11 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_TEXTAREA_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         FreeTextArea fta = (FreeTextArea) guiProperties.getComponents().get(0);
 
@@ -181,7 +196,11 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_CHECKBOX_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         FreeCheckBox fcb = (FreeCheckBox) guiProperties.getComponents().get(0);
 
@@ -201,17 +220,13 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_COMBOBOX_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            assertThat(e.getMessage(), is("Unable to open file 'C:\\GradleTutorials\\ScriptDirectedGui\\GuiSourceFiles\\null\\projectNames.combo'"));
+        } finally {
+            assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ZERO));
 
-        FreeComboBox fcb = (FreeComboBox) guiProperties.getComponents().get(0);
-
-        assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
-        assertThat(fcb.getItem(0), is(TEST_COMBOBOX_OUTPUT));
-        fcb.clearComboBox();
-        fcb.repopulateComboBox(items);
-        assertThat(fcb.getItem(0), is(TEST_COMBOBOX_OUTPUT));
-        for (int i = 1; i <= numItems; i++) {
-            assertThat(fcb.getItem(i), is("Choice " + i));
         }
     }
 
@@ -227,20 +242,12 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_LABELCOMBOBOXPAIR_INPUT);
 
-        guiScriptParser.parseComponents(components);
-
-        FreeLabelComboBoxPair fcb = (FreeLabelComboBoxPair) guiProperties.getComponents().get(0);
-
-        assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ONE));
-        assertThat(fcb.getLabelText(), is(TEST_LABELCOMBOBOXPAIR_OUTPUT));
-        assertThat(fcb.getComboBox().getItem(0), is(TEST_COMBOBOX_OUTPUT));
-        assertThat(fcb.isFirstItemSelected(), is(true));
-
-        fcb.clearComboBox();
-        fcb.repopulateComboBox(items);
-        assertThat(fcb.getComboBox().getItem(0), is(TEST_COMBOBOX_OUTPUT));
-        for (int i = 1; i <= numItems; i++) {
-            assertThat(fcb.getComboBox().getItem(i), is("Choice " + i));
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            assertThat(e.getMessage(), is("Unable to open file 'C:\\GradleTutorials\\ScriptDirectedGui\\GuiSourceFiles\\null\\projectNames.combo'"));
+        } finally {
+            assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ZERO));
         }
     }
 
@@ -253,7 +260,11 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_LABELTEXTFIELDPAIR_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         FreeLabelTextFieldPair ftfp = (FreeLabelTextFieldPair) guiProperties.getComponents().get(0);
 
@@ -281,7 +292,11 @@ public class TestGuiScriptParser {
         ArrayList<String> components = new ArrayList<>();
         components.add(TEST_LABELTEXTBUTTONTRIPLE_INPUT);
 
-        guiScriptParser.parseComponents(components);
+        try {
+            guiScriptParser.parseComponents(components);
+        } catch (ComboBoxItemsFileException e) {
+            e.printStackTrace();
+        }
 
         FreeLabelTextButtonTriple ftfp = (FreeLabelTextButtonTriple) guiProperties.getComponents().get(0);
 

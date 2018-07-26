@@ -1,5 +1,6 @@
 package com.thehutgroup.createdgui;
 
+import com.thehutgroup.exceptions.GuiScriptFileException;
 import com.thehutgroup.guiScriptParser.GuiBuilder;
 import com.thehutgroup.guiScriptParser.GuiScriptParser;
 import com.thehutgroup.guicomponents.FreeButton;
@@ -479,7 +480,11 @@ public class MainGui extends JFrame {
         //System.out.println("ScriptDirectedGui: This method will run at startup and create the appropriate GUI properties from the input script");
         guiProperties.clearAllArrays();
         GuiScriptParser gsp = new GuiScriptParser(guiProperties);
-        gsp.readInputScript(projectName, scriptName);
+        try {
+            gsp.readInputScript(projectName, scriptName);
+        } catch (GuiScriptFileException e) {
+            e.printStackTrace();
+        }
         GuiBuilder gb = new GuiBuilder(guiProperties);
         gb.buildGuiClass();
     }
