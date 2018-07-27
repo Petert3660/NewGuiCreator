@@ -6,6 +6,7 @@ package com.thehutgroup.createdgui;
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeLabelTextFieldPair;
+import com.thehutgroup.messages.MessageHandler;
 import com.thehutgroup.statics.Statics;
 import com.thehutgroup.utilities.FileUtilities;
 import org.apache.commons.lang.StringUtils;
@@ -19,10 +20,10 @@ import java.io.IOException;
 
 public class NewProjectGui extends JFrame {
 
-    private static final String SUB_HEADING_ONE = "Create New GUI Script Project";
-    private static final String SUB_HEADING_TWO = "Create New Java Project";
-    private static final String SUB_HEADING_THREE = "Create SpringBoot Project";
-    private static final String SUB_HEADING_FOUR = "Create SpringBoot Web Project";
+    private static final String SUB_HEADING_ONE = " - Create New GUI Script Project";
+    private static final String SUB_HEADING_TWO = " - Create New Java Project";
+    private static final String SUB_HEADING_THREE = " - Create SpringBoot Project";
+    private static final String SUB_HEADING_FOUR = " - Create SpringBoot Web Project";
     private static String TITLE;
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 250;
@@ -33,17 +34,22 @@ public class NewProjectGui extends JFrame {
 
     private String mode;
 
-    public NewProjectGui(MainGui mg, String mode) {
+    private MessageHandler messageHandler;
+
+    public NewProjectGui(MainGui mg, String mode, MessageHandler messageHandler) {
+
+        this.messageHandler = messageHandler;
 
         this.mode = mode;
+        TITLE = messageHandler.getMessage("constants.mainheading");
         if (mode.equals("script")) {
-            TITLE = Statics.MAIN_HEADING + " - " + SUB_HEADING_ONE;
+            TITLE = TITLE + SUB_HEADING_ONE;
         } else if (mode.equals("code")) {
-            TITLE = Statics.MAIN_HEADING + " - " + SUB_HEADING_TWO;
+            TITLE = TITLE + SUB_HEADING_TWO;
         } else if (mode.equals(("spring"))) {
-            TITLE = Statics.MAIN_HEADING + " - " + SUB_HEADING_THREE;
+            TITLE = TITLE + SUB_HEADING_THREE;
         } else if (mode.equals(("spring-web"))) {
-            TITLE = Statics.MAIN_HEADING + " - " + SUB_HEADING_FOUR;
+            TITLE = TITLE + SUB_HEADING_FOUR;
         }
 
         this.mg = mg;

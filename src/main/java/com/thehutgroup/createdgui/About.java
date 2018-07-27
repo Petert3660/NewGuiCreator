@@ -5,17 +5,17 @@ package com.thehutgroup.createdgui;
 
 import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
-import com.thehutgroup.statics.Statics;
-
-import javax.swing.*;
-import java.awt.*;
+import com.thehutgroup.messages.MessageHandler;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class About extends JFrame {
 
-    private static final String SUB_HEADING = "About";
-    private static final String TITLE = SUB_HEADING;
     private static final int FRAME_X_SIZE = 400;
     private static final int FRAME_Y_SIZE = 300;
     private Color col = new Color(230, 255, 255);
@@ -24,7 +24,14 @@ public class About extends JFrame {
 
     private MainGui mg;
 
-    public About(MainGui mg) {
+    private MessageHandler messageHandler;
+
+    @Autowired
+    public About(MainGui mg, MessageHandler messageHandler) {
+
+        this.messageHandler = messageHandler;
+
+        final String TITLE = messageHandler.getMessage("components.about.title");
 
         this.mg = mg;
         this.mg.setEnabled(false);
@@ -36,16 +43,17 @@ public class About extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
-        FreeLabel l0 = new FreeLabel(Statics.MAIN_HEADING, 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
+        FreeLabel l0 = new FreeLabel(messageHandler.getMessage("constants.mainheading"), 30, 30, 500, 20,
+            new Font("", Font.BOLD + Font.ITALIC, 20));
 
         FreeButton b0 = new FreeButton(FreeButton.OK, 160, 200, 80);
 
 
-        FreeLabel comp0 = new FreeLabel(Statics.MAIN_HEADING, 30, 90, 200, 20);
+        FreeLabel comp0 = new FreeLabel(messageHandler.getMessage("constants.mainheading"), 30, 90, 200, 20);
 
-        FreeLabel comp1 = new FreeLabel(Statics.VERSION + BuildVersion.getBuildVersion(), 30, 110, 200, 20);
+        FreeLabel comp1 = new FreeLabel(messageHandler.getMessage("constants.version", BuildVersion.getBuildVersion()), 30, 110, 200, 20);
 
-        FreeLabel comp2 = new FreeLabel(Statics.COPYRIGHT, 30, 130, 200, 20);
+        FreeLabel comp2 = new FreeLabel(messageHandler.getMessage("constants.copyright"), 30, 130, 200, 20);
 
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {

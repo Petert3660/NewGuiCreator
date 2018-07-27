@@ -74,7 +74,7 @@ public class MainGui extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
-        FreeLabel l0 = new FreeLabel(Statics.MAIN_HEADING, 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
+        FreeLabel l0 = new FreeLabel(messageHandler.getMessage("constants.mainheading"), 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
 
         FreeButton b0 = new FreeButton(FreeButton.EXIT, 460, 800, 80);
 
@@ -215,7 +215,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create New Project\Projects menu item
         menuItem10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NewProjectGui npg = new NewProjectGui(tg, "script");
+                NewProjectGui npg = new NewProjectGui(tg, "script", messageHandler);
                 GuiHelper.showFrame(npg);
             }
         });
@@ -327,7 +327,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create & Copy GUI\Create New GUI Project menu item
         menuItem60.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NewProjectGui npg = new NewProjectGui(tg, "code");
+                NewProjectGui npg = new NewProjectGui(tg, "code", messageHandler);
                 GuiHelper.showFrame(npg);
             }
         });
@@ -366,7 +366,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create & Copy GUI\Create Basic SpringBoot Project menu item
         menuItem63.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NewProjectGui npg = new NewProjectGui(tg, "spring");
+                NewProjectGui npg = new NewProjectGui(tg, "spring", messageHandler);
                 GuiHelper.showFrame(npg);
             }
         });
@@ -374,7 +374,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create & Copy GUI\Create Basic SpringBoot Web Project menu item
         menuItem64.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                NewProjectGui npg = new NewProjectGui(tg, "spring-web");
+                NewProjectGui npg = new NewProjectGui(tg, "spring-web", messageHandler);
                 GuiHelper.showFrame(npg);
             }
         });
@@ -384,7 +384,7 @@ public class MainGui extends JFrame {
         // This is the control for the Help\About menu item
         menuItem42.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                About about = new About(tg);
+                About about = new About(tg, messageHandler);
                 GuiHelper.showFrame(about);
             }
         });
