@@ -12,3 +12,6 @@ src/main/java/com/thehutgroup/testingarea/
 
 *.tmp
 
+src/main/java/com/thehutgroup/resources/guiScriptLatest
+
+

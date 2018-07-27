@@ -12,6 +12,7 @@ import com.thehutgroup.guicomponents.FreeRadioButtonGroup;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
 import com.thehutgroup.guis.GuiProperties;
+import com.thehutgroup.statics.Statics;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -21,13 +22,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class GuiBuilder {
 
-    private static final String RESOURCES_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\src\\main\\resources\\";
+    private static String RESOURCES_DIR;
 
     private GuiProperties guiProperties;
     
     @Autowired
     public GuiBuilder(GuiProperties guiProperties) {
         this.guiProperties = guiProperties;
+        RESOURCES_DIR = Statics.SCD_RESOURCES_DIR;
     }
 
     public void buildGuiClass() {
