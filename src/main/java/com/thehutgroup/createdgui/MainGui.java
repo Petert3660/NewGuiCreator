@@ -46,9 +46,9 @@ public class MainGui extends JFrame {
 
     private FreeTextArea comp0 = new FreeTextArea(col, null, 30, 90, 300, 935, 620, false);
 
-    private FreeLabel comp1 = new FreeLabel(Statics.PROJECT_SEL_MESSAGE + Statics.NO_PROJ_MESSAGE, 30, 750, 400, 20);
-    private FreeLabel comp2 = new FreeLabel(Statics.LAST_FILE_BUILT_MESSAGE, 30, 790, 400, 20);
-    private FreeLabel comp3 = new FreeLabel(Statics.JAVA_PROJ_SEL_MESSAGE + Statics.NO_PROJ_MESSAGE, 30, 770, 400, 20);
+    private FreeLabel comp1;
+    private FreeLabel comp2;
+    private FreeLabel comp3;
 
     JMenuItem menuItem50;
 
@@ -69,6 +69,14 @@ public class MainGui extends JFrame {
         TITLE = messageHandler.getMessage("constants.mainheading");
 
         comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
+
+        comp1 = new FreeLabel(messageHandler.getMessage("constants.project.selectedmessage",
+            new String[]{messageHandler.getMessage("constants.project.noprojectmessage")}),30, 750, 400, 20);
+
+        comp2 = new FreeLabel(messageHandler.getMessage("constants.project.lastbuiltmessage", new String[]{""}), 30, 790, 400, 20);
+
+        comp3 = new FreeLabel(messageHandler.getMessage("constants.project.javaselectedmessage",
+            new String[]{messageHandler.getMessage("constants.project.noprojectmessage")}), 30, 770, 400, 20);
 
         this.setTitle(messageHandler.getMessage("constants.mainheading"));
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
@@ -520,18 +528,18 @@ public class MainGui extends JFrame {
 
     public void updateProjectSelection(String newValue) {
         projectName = newValue;
-        comp1.setLabelText(Statics.PROJECT_SEL_MESSAGE + newValue);
+        comp1.setLabelText( messageHandler.getMessage("constants.project.selectedmessage", new String[]{newValue}));
         p1.repaint();
     }
 
     public void updateJavaProjectSelection(String value) {
         javaProjectName = value;
-        comp3.setLabelText(Statics.PROJECT_SEL_MESSAGE + value);
+        comp3.setLabelText( messageHandler.getMessage("constants.project.selectedmessage", new String[]{value}));
         p1.repaint();
     }
 
     public void updateBuiltFile(String newValue) {
-        comp2.setLabelText(Statics.LAST_FILE_BUILT_MESSAGE + newValue);
+        comp2.setLabelText(messageHandler.getMessage("constants.project.lastbuiltmessage", new String[]{newValue}));
         p1.repaint();
     }
 

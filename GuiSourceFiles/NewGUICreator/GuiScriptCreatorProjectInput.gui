@@ -1,0 +1,18 @@
+// This is a GUI Script which creates a small dialog for entering data
+
+dimension: xsize=550, ysize=250
+
+backgroundcolor: value=230, 255, 255
+
+heading: value=New GUI Script Creator
+
+subheading: value=Create New Project
+
+menus:
+
+components:
+    [FreeLabelTextFieldPair: Please enter the new project name:, 10]
+
+buttons:
+    [OK],
+    [Cancel-implement]

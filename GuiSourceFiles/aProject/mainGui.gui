@@ -1,0 +1,17 @@
+// This is a GUI Script that we are just trying out as part of testing
+
+dimension: xsize=800, ysize=600
+
+backgroundcolor: value=230, 255, 255
+
+heading: value=A Test Project
+
+menus:
+    [File: Open File, Close File, -separator, Exit-implement]
+    [Edit: Create, Read, Update, Delete]
+    [Help: Help, -separator, About]
+
+components:
+
+buttons:
+    [Exit-implement]

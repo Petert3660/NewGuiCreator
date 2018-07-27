@@ -1,0 +1,33 @@
+// This is a test GUI Script which illustrates how to use these scripts (treat them as recipes!!)
+
+dimension: xsize=1000, ysize=900
+
+backgroundcolor: value=235, 255, 255
+
+heading: value=Example Dashboard
+
+subheading: value=Main Dashboard
+
+menus:
+    [File: Open, Close, Exit]
+    [Edit: DoThis, DoThat, -separator, DoTheOther]
+    [AnotherMenu: DoThis, DoThat]
+
+components:
+    [FreeLabelTextFieldPair: Please enter the new branch name:, 10]
+    [FreeLabelComboBoxPair: Please select the project name:, 10, projectNames]
+    [FreeLabel: This is an example of a free label, 400]
+    [FreeCheckBox: Please select if this is to be selected, 300]
+    [FreeTextField: This is an example of a free textField, 500]
+    [FreeComboBox: 200, projectNames]
+    [FreeRadioButtonGroup: Radio One, 150, Radio Two, 150]
+    [FreeLabelTextButtonTriple: Please enter a file name:, 10, Clear]
+    [FreeTextArea: The output will be shown below:, 200, 950, 200, false]
+
+buttons:
+    [OK],
+    [Browse-implement],
+    [Clear],
+    [Exit-implement]
+
+

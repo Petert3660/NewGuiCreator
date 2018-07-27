@@ -1,0 +1,20 @@
+// This is a GUI Script which will set up a Main GUI with a menu for entering & creating new GUI Scripts
+
+dimension: xsize=1000, ysize=900
+
+backgroundcolor: value=235, 255, 255
+
+heading: value=New GUI Script Creator
+
+menus:
+    [File: Open File, Save File, Close File, -separator, Exit-implement]
+    [Create New Project: Create New Target Project]
+    [Create GUI Script: Create New GUI Script]
+    [Create Combo Options: Create New Combo Options]
+    [Help: Help, -separator, About]
+
+components:
+    [FreeTextArea: Please enter your new script here:, 200, 935, 600, false]
+
+buttons:
+    [Exit-implement]

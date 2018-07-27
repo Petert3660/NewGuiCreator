@@ -1,0 +1,16 @@
+// This is a GUI Script that we are just trying out as part of testing
+
+dimension: xsize=800, ysize=400
+
+backgroundcolor: value=230, 255, 255
+
+heading: value=GIT Branch Creator Project
+
+menus:
+    [File: Open, Close, -separator, Exit-implement]
+    [Edit: Read, Write, Close]
+
+components:
+
+buttons:
+    [Exit-implement]

@@ -1,0 +1,19 @@
+// This is a test GUI Script which creates a small dialog for entering data
+
+dimension: xsize=550, ysize=300
+
+backgroundcolor: value=230, 255, 255
+
+heading: value=GIT Branch Controller
+
+subheading: value=Create New Branch in GIT
+
+menus:
+
+components:
+    [FreeLabelComboBoxPair: Please select the project name:, 10, projectNames]
+    [FreeLabelTextFieldPair: Please enter the new branch name:, 10]
+
+buttons:
+    [OK]
+    [Cancel-implement]
