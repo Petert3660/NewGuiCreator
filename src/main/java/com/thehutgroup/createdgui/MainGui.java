@@ -66,7 +66,7 @@ public class MainGui extends JFrame {
         this.guiProperties = guiProperties;
         this.messageHandler = messageHandler;
 
-        comp0.setLabelText(messageHandler.getMessage("messages","textarea.label"));
+        comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
 
         this.setTitle(TITLE);
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
@@ -98,22 +98,22 @@ public class MainGui extends JFrame {
     }
 
     private void setUpMenuBar() {
-        JMenu menu0 = new JMenu(messageHandler.getMessage("messages","menu.titles.file"));
-        JMenuItem menuItem00 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.open.guiscript"));
+        JMenu menu0 = new JMenu(messageHandler.getMessage("components.menu.titles.file"));
+        JMenuItem menuItem00 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.open.guiscript"));
         menu0.add(menuItem00);
-        JMenuItem menuItem01 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.save.guiscript"));
+        JMenuItem menuItem01 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.save.guiscript"));
         menu0.add(menuItem01);
-        JMenuItem menuItem02 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.close.guiscript"));
+        JMenuItem menuItem02 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.close.guiscript"));
         menu0.add(menuItem02);
         menu0.addSeparator();
-        JMenuItem menuItem05 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.open.combooption"));
+        JMenuItem menuItem05 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.open.combooption"));
         menu0.add(menuItem05);
-        JMenuItem menuItem06 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.save.combooption"));
+        JMenuItem menuItem06 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.save.combooption"));
         menu0.add(menuItem06);
-        JMenuItem menuItem07 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.close.combooption"));
+        JMenuItem menuItem07 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.close.combooption"));
         menu0.add(menuItem07);
         menu0.addSeparator();
-        JMenuItem menuItem04 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.file.exit"));
+        JMenuItem menuItem04 = new JMenuItem(messageHandler.getMessage("components.menu.titles.file.exit"));
         menu0.add(menuItem04);
 
         // This is the control for the File\Open File menu item
@@ -122,14 +122,14 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
                         if (openOpenFileChoice("GUI Files", Statics.GUI_EXTENSION) == 0) {
-                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.noguifiles"),
+                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noguifiles"),
                                     TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.noprojectselected"),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
                             TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -139,7 +139,7 @@ public class MainGui extends JFrame {
         menuItem01.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (StringUtils.isEmpty(projectName)) {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages", "message.warning.noprojectselected"),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
                         TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
@@ -170,14 +170,14 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
                         if (openOpenFileChoice(Statics.COMBO_DESC, Statics.COMBO_OPTIONS_EXTENSION) == 0) {
-                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages", "message.warning.nocombofiles"),
+                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.nocombofiles"),
                                     TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.noprojectselected"),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
                             TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -186,7 +186,7 @@ public class MainGui extends JFrame {
         menuItem06.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (StringUtils.isEmpty(projectName)) {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.noprojectselected"),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
                         TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
@@ -206,10 +206,10 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu0);
 
-        JMenu menu1 = new JMenu(messageHandler.getMessage("messages","menu.titles.project"));
-        JMenuItem menuItem10 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.project.create"));
+        JMenu menu1 = new JMenu(messageHandler.getMessage("components.menu.titles.project"));
+        JMenuItem menuItem10 = new JMenuItem(messageHandler.getMessage("components.menu.titles.project.create"));
         menu1.add(menuItem10);
-        JMenuItem menuItem11 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.project.open"));
+        JMenuItem menuItem11 = new JMenuItem(messageHandler.getMessage("components.menu.titles.project.open"));
         menu1.add(menuItem11);
 
         // This is the control for the Create New Project\Projects menu item
@@ -229,14 +229,14 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu1);
 
-        JMenu menu2 = new JMenu(messageHandler.getMessage("messages","menu.titles.createscript"));
-        JMenuItem menuItem20 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.createscript.new"));
+        JMenu menu2 = new JMenu(messageHandler.getMessage("components.menu.titles.createscript"));
+        JMenuItem menuItem20 = new JMenuItem(messageHandler.getMessage("components.menu.titles.createscript.new"));
         menu2.add(menuItem20);
 
         // This is the control for the Create GUI Script\Create New GUI Script menu item
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                comp0.setLabelText(messageHandler.getMessage("messages","textarea.label"));
+                comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
                 p1.repaint();
                 try {
                     int res = saveUnsavedInput();
@@ -248,14 +248,14 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu2);
 
-        JMenu menu3 = new JMenu(messageHandler.getMessage("messages","menu.titles.createcombo"));
-        JMenuItem menuItem30 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.createcombo.new"));
+        JMenu menu3 = new JMenu(messageHandler.getMessage("components.menu.titles.createcombo"));
+        JMenuItem menuItem30 = new JMenuItem(messageHandler.getMessage("components.menu.titles.createcombo.new"));
         menu3.add(menuItem30);
 
         // This is the control for the Create Combo Options\Create New Combo Options menu item
         menuItem30.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                comp0.setLabelText(messageHandler.getMessage("messages","textarea.label.combo"));
+                comp0.setLabelText(messageHandler.getMessage("components.textarea.label.combo"));
                 p1.repaint();
                 try {
                     int res = saveUnsavedInput();
@@ -267,11 +267,11 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu3);
 
-        JMenu menu4 = new JMenu(messageHandler.getMessage("messages","menu.titles.help"));
-        JMenuItem menuItem40 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.help.help"));
+        JMenu menu4 = new JMenu(messageHandler.getMessage("components.menu.titles.help"));
+        JMenuItem menuItem40 = new JMenuItem(messageHandler.getMessage("components.menu.titles.help.help"));
         menu4.add(menuItem40);
         menu4.addSeparator();
-        JMenuItem menuItem42 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.help.about"));
+        JMenuItem menuItem42 = new JMenuItem(messageHandler.getMessage("components.menu.titles.help.about"));
         menu4.add(menuItem42);
 
         // This is the control for the Help\Help menu item
@@ -281,8 +281,8 @@ public class MainGui extends JFrame {
             }
         });
 
-        JMenu menu5 = new JMenu(messageHandler.getMessage("messages","menu.titles.compile"));
-        menuItem50 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.compile.run"));
+        JMenu menu5 = new JMenu(messageHandler.getMessage("components.menu.titles.compile"));
+        menuItem50 = new JMenuItem(messageHandler.getMessage("components.menu.titles.compile.run"));
         menu5.add(menuItem50);
 
         // This is the control for the Compile & Run\Compile & Run and Test Gui menu item
@@ -291,7 +291,7 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     if (StringUtils.isEmpty(comp0.getText())) {
                         if (StringUtils.isEmpty(comp0.getText())) {
-                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.nofiles"),
+                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.nofiles"),
                                 TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
@@ -303,7 +303,7 @@ public class MainGui extends JFrame {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.nojavaprojectselectedcompile"),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.nojavaprojectselectedcompile"),
                             TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -311,17 +311,17 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu5);
 
-        JMenu menu6 = new JMenu(messageHandler.getMessage("messages","menu.titles.copy"));
-        JMenuItem menuItem60 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.copy.createjava"));
+        JMenu menu6 = new JMenu(messageHandler.getMessage("components.menu.titles.copy"));
+        JMenuItem menuItem60 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.createjava"));
         menu6.add(menuItem60);
-        JMenuItem menuItem62 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.copy.openexistingjava"));
+        JMenuItem menuItem62 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.openexistingjava"));
         menu6.add(menuItem62);
-        JMenuItem menuItem61 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.copy.copyjava"));
+        JMenuItem menuItem61 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.copyjava"));
         menu6.add(menuItem61);
         menu6.addSeparator();
-        JMenuItem menuItem63 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.copy.createspringboot"));
+        JMenuItem menuItem63 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.createspringboot"));
         menu6.add(menuItem63);
-        JMenuItem menuItem64 = new JMenuItem(messageHandler.getMessage("messages","menu.titles.copy.createwebspringboot"));
+        JMenuItem menuItem64 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.createwebspringboot"));
         menu6.add(menuItem64);
 
         // This is the control for the Create & Copy GUI\Create New GUI Project menu item
@@ -342,14 +342,14 @@ public class MainGui extends JFrame {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.info.javacopysuccess", new String[]{javaProjectName}),
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.info.javacopysuccess", new String[]{javaProjectName}),
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     if (StringUtils.isEmpty(javaProjectName)) {
-                        JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.nojavaprojectselectedcopy"),
+                        JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.nojavaprojectselectedcopy"),
                                 TITLE, JOptionPane.WARNING_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.warning.norecentscript"),
+                        JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.norecentscript"),
                                 TITLE, JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -397,7 +397,7 @@ public class MainGui extends JFrame {
         int res = 0;
         if (!StringUtils.isEmpty(comp0.getText())) {
             res = JOptionPane.showConfirmDialog(tg,
-                messageHandler.getMessage("messages","message.warning.unsavedmaterial"),
+                messageHandler.getMessage("messages.warning.unsavedmaterial"),
                     TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 1) {
                 comp0.clearTextArea();
@@ -438,7 +438,7 @@ public class MainGui extends JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
-        int returnVal = fc.showDialog(tg,messageHandler.getMessage("messages","filechooser.approve.button.selectproject"));
+        int returnVal = fc.showDialog(tg,messageHandler.getMessage("components.filechooser.approve.button.selectproject"));
 
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
@@ -493,7 +493,7 @@ public class MainGui extends JFrame {
         FileCopyUtils.copy(new File(src), new File(target));
         FileUtils.deleteQuietly(new File(src));
         if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
-            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages","message.error.missingscriptfile", new String[]{projName + "\\" + fileName}),
+            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.error.missingscriptfile", new String[]{projName + "\\" + fileName}),
                 TITLE, JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
