@@ -62,7 +62,7 @@ public class NewProjectGui extends JFrame {
         p1.setLayout(null);
         p1.setBackground(col);
 
-        FreeLabel l0 = new FreeLabel(Statics.MAIN_HEADING, 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
+        FreeLabel l0 = new FreeLabel(messageHandler.getMessage("constants.mainheading"), 30, 30, 500, 20, new Font("", Font.BOLD + Font.ITALIC, 20));
 
         FreeButton b0 = new FreeButton(FreeButton.OK, 180, 150, 80);
 

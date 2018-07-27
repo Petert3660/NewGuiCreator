@@ -51,7 +51,7 @@ public class About extends JFrame {
 
         FreeLabel comp0 = new FreeLabel(messageHandler.getMessage("constants.mainheading"), 30, 90, 200, 20);
 
-        FreeLabel comp1 = new FreeLabel(messageHandler.getMessage("constants.version", BuildVersion.getBuildVersion()), 30, 110, 200, 20);
+        FreeLabel comp1 = new FreeLabel(messageHandler.getMessage("constants.version", new String[]{BuildVersion.getBuildVersion()}), 30, 110, 200, 20);
 
         FreeLabel comp2 = new FreeLabel(messageHandler.getMessage("constants.copyright"), 30, 130, 200, 20);
 

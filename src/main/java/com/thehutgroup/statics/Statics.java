@@ -3,10 +3,6 @@ package com.thehutgroup.statics;
 public class Statics {
 
     // Project Constants
-    public static final String MAIN_HEADING = "New GUI Script Creator";
-    public static final String VERSION = "Version ";
-    public static final String COPYRIGHT = "Copyright: Peter Thomson, 2018";
-
     public static final String PROJECT_SEL_MESSAGE = "Project selected: ";
     public static final String JAVA_PROJ_SEL_MESSAGE = "Java Project selected: ";
     public static final String NO_PROJ_MESSAGE = "There is currently no project selected";

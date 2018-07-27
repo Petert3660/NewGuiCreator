@@ -33,7 +33,7 @@ import org.springframework.util.FileCopyUtils;
 
 public class MainGui extends JFrame {
 
-    private static final String TITLE = Statics.MAIN_HEADING;
+    private static String TITLE;
     private static final int FRAME_X_SIZE = 1000;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(235, 255, 255);
@@ -66,9 +66,11 @@ public class MainGui extends JFrame {
         this.guiProperties = guiProperties;
         this.messageHandler = messageHandler;
 
+        TITLE = messageHandler.getMessage("constants.mainheading");
+
         comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
 
-        this.setTitle(TITLE);
+        this.setTitle(messageHandler.getMessage("constants.mainheading"));
         this.setSize(FRAME_X_SIZE, FRAME_Y_SIZE);
 
         p1.setLayout(null);
