@@ -10,7 +10,6 @@ import com.thehutgroup.guis.GuiHelper;
 import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.messages.MessageHandler;
 import com.thehutgroup.runners.ScriptRunner;
-import com.thehutgroup.statics.Statics;
 import com.thehutgroup.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
@@ -34,6 +33,10 @@ import org.springframework.util.FileCopyUtils;
 public class MainGui extends JFrame {
 
     private static String TITLE;
+    private static String GUI_EXT;
+    private static String COMBO_EXT;
+
+    public static final int EXIT_STATUS = 0;
     private static final int FRAME_X_SIZE = 1000;
     private static final int FRAME_Y_SIZE = 900;
     private Color col = new Color(235, 255, 255);
@@ -67,6 +70,8 @@ public class MainGui extends JFrame {
         this.messageHandler = messageHandler;
 
         TITLE = messageHandler.getMessage("constants.mainheading");
+        GUI_EXT = messageHandler.getMessage("filepaths.gui.ext");
+        COMBO_EXT = messageHandler.getMessage("filepaths.combo.ext");
 
         comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
 
@@ -91,7 +96,7 @@ public class MainGui extends JFrame {
         // This is the control for the Exit-implement button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(Statics.EXIT_STATUS);
+                System.exit(EXIT_STATUS);
             }
         });
 
@@ -131,7 +136,7 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
-                        if (openOpenFileChoice("GUI Files", Statics.GUI_EXTENSION) == 0) {
+                        if (openOpenFileChoice("GUI Files", GUI_EXT) == 0) {
                             JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noguifiles"),
                                     TITLE, JOptionPane.WARNING_MESSAGE);
                         }
@@ -153,7 +158,7 @@ public class MainGui extends JFrame {
                         TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
-                        openSaveFileChoice(Statics.GUI_EXTENSION);
+                        openSaveFileChoice(GUI_EXT);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -171,7 +176,7 @@ public class MainGui extends JFrame {
         // This is the control for the File\Exit-implement menu item
         menuItem04.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.exit(Statics.EXIT_STATUS);
+                System.exit(EXIT_STATUS);
             }
         });
 
@@ -179,7 +184,7 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
-                        if (openOpenFileChoice(Statics.COMBO_DESC, Statics.COMBO_OPTIONS_EXTENSION) == 0) {
+                        if (openOpenFileChoice(messageHandler.getMessage("filepaths.combo.description"), COMBO_EXT) == 0) {
                             JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.nocombofiles"),
                                     TITLE, JOptionPane.WARNING_MESSAGE);
                         }
@@ -200,7 +205,7 @@ public class MainGui extends JFrame {
                         TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
-                        openSaveFileChoice(Statics.COMBO_OPTIONS_EXTENSION);
+                        openSaveFileChoice(COMBO_EXT);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -412,7 +417,7 @@ public class MainGui extends JFrame {
             if (res == 1) {
                 comp0.clearTextArea();
             } else {
-                openSaveFileChoice(Statics.GUI_EXTENSION);
+                openSaveFileChoice(GUI_EXT);
             }
         }
         return res;
@@ -425,10 +430,10 @@ public class MainGui extends JFrame {
         } else {
             fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})));
         }
-        if (extension.equals(Statics.GUI_EXTENSION)) {
-            openAndSaveToCorrectFileType(fc, extension, Statics.GUI_DESC);
-        } else if (extension.equals(Statics.COMBO_OPTIONS_EXTENSION)) {
-            openAndSaveToCorrectFileType(fc, extension, Statics.COMBO_DESC);
+        if (extension.equals(GUI_EXT)) {
+            openAndSaveToCorrectFileType(fc, extension, messageHandler.getMessage("filepaths.gui.description"));
+        } else if (extension.equals(COMBO_EXT)) {
+            openAndSaveToCorrectFileType(fc, extension, messageHandler.getMessage("filepaths.combo.description"));
         }
     }
 
@@ -437,10 +442,10 @@ public class MainGui extends JFrame {
         fc.setFileFilter(filter);
         int returnVal = fc.showSaveDialog(tg);
         if (returnVal == 0) {
-            String filename = fc.getSelectedFile().getName().replace(Statics.COMBO_OPTIONS_EXTENSION, "");
+            String filename = fc.getSelectedFile().getName().replace(COMBO_EXT, "");
             String allText = comp0.getText();
             FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + filename})
-                + Statics.COMBO_OPTIONS_EXTENSION, allText);
+                + COMBO_EXT, allText);
         }
     }
 
@@ -479,9 +484,9 @@ public class MainGui extends JFrame {
             FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.lastscript"), "");
             String allText = FileUtilities.writeFileToString(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + file.getName()}));
             comp0.setText(allText);
-            if (extension.equals(Statics.GUI_EXTENSION)) {
+            if (extension.equals(GUI_EXT)) {
                 menuItem50.setEnabled(true);
-            } else if (extension.equals(Statics.COMBO_OPTIONS_EXTENSION)) {
+            } else if (extension.equals(COMBO_EXT)) {
                 menuItem50.setEnabled(false);
             }
         } else {
@@ -512,7 +517,7 @@ public class MainGui extends JFrame {
     private void createGuiProperties(String projectName, String scriptName) {
         //System.out.println("ScriptDirectedGui: This method will run at startup and create the appropriate GUI properties from the input script");
         guiProperties.clearAllArrays();
-        GuiScriptParser gsp = new GuiScriptParser(guiProperties);
+        GuiScriptParser gsp = new GuiScriptParser(guiProperties, messageHandler);
         try {
             gsp.readInputScript(projectName, scriptName);
         } catch (GuiScriptFileException e) {
@@ -547,9 +552,10 @@ public class MainGui extends JFrame {
 
         //This method updates the template project with the latest versions of the Gui Components
 
-        String srcDir = Statics.NEW_GUI_CREATOR_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS;
-        String targDir = messageHandler.getMessage("filepaths.templateproject", new String[]{Statics.RELATIVE_PATH_FOR_COMPONENTS});
-        String targDirRun = messageHandler.getMessage("filepaths.testrunner", new String[]{Statics.RELATIVE_PATH_FOR_COMPONENTS});
+        String rpc = messageHandler.getMessage("filepaths.relativepathforcomponents", new String[]{""});
+        String srcDir = messageHandler.getMessage("filepaths.newguicreatorproject", new String[]{rpc});
+        String targDir = messageHandler.getMessage("filepaths.templateproject", new String[]{rpc});
+        String targDirRun = messageHandler.getMessage("filepaths.testrunner", new String[]{rpc});
 
         FileUtilities.copyAllFilesFromSrcDirToTargetDir(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{srcDir}),
             messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{targDir}));

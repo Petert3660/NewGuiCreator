@@ -7,16 +7,17 @@ import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeLabelTextFieldPair;
 import com.thehutgroup.messages.MessageHandler;
-import com.thehutgroup.statics.Statics;
 import com.thehutgroup.utilities.FileUtilities;
-import org.apache.commons.lang.StringUtils;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import org.apache.commons.lang.StringUtils;
 
 public class NewProjectGui extends JFrame {
 
@@ -24,7 +25,11 @@ public class NewProjectGui extends JFrame {
     private static final String SUB_HEADING_TWO = " - Create New Java Project";
     private static final String SUB_HEADING_THREE = " - Create SpringBoot Project";
     private static final String SUB_HEADING_FOUR = " - Create SpringBoot Web Project";
+
     private static String TITLE;
+    private static String SETTINGS_GRADLE;
+    private static String RUN_BAT;
+
     private static final int FRAME_X_SIZE = 550;
     private static final int FRAME_Y_SIZE = 250;
     private Color col = new Color(230, 255, 255);
@@ -39,6 +44,9 @@ public class NewProjectGui extends JFrame {
     public NewProjectGui(MainGui mg, String mode, MessageHandler messageHandler) {
 
         this.messageHandler = messageHandler;
+
+        SETTINGS_GRADLE = messageHandler.getMessage("filepaths.settings.gradle.location");
+        RUN_BAT = messageHandler.getMessage("filepaths.run.bat.location");
 
         this.mode = mode;
         TITLE = messageHandler.getMessage("constants.mainheading");
@@ -118,9 +126,9 @@ public class NewProjectGui extends JFrame {
                             try {
                                 FileUtilities.copyAllFilesFromSrcDirToTargetDir(srcfile.getAbsolutePath(),
                                         file.getAbsolutePath());
-                                FileUtilities.deleteFile(file.getAbsolutePath() + "\\settings.gradle");
+                                FileUtilities.deleteFile(file.getAbsolutePath() + SETTINGS_GRADLE);
                                 FileUtilities
-                                        .writeStringToFile(file.getAbsolutePath() + Statics.SETTINGS_GRADLE_LOCATION,
+                                        .writeStringToFile(file.getAbsolutePath() + SETTINGS_GRADLE,
                                                 "rootProject.name = '" + file.getName() + "'\n");
                             } catch (IOException e1) {
                                 e1.printStackTrace();
@@ -152,16 +160,16 @@ public class NewProjectGui extends JFrame {
                             try {
                                 FileUtilities.copyAllFilesFromSrcDirToTargetDir(srcfile.getAbsolutePath(),
                                         file.getAbsolutePath());
-                                FileUtilities.deleteFile(file.getAbsolutePath() + Statics.SETTINGS_GRADLE_LOCATION);
+                                FileUtilities.deleteFile(file.getAbsolutePath() + SETTINGS_GRADLE);
                                 FileUtilities.writeStringToFile(
-                                        file.getAbsolutePath() + Statics.SETTINGS_GRADLE_LOCATION,
+                                        file.getAbsolutePath() + SETTINGS_GRADLE,
                                         "rootProject.name = '" + file.getName() + "'\n");
-                                FileUtilities.deleteFile(file.getAbsolutePath() + Statics.RUN_BAT_LOCATION);
-                                FileUtilities.writeStringToFile(file.getAbsolutePath() + Statics.RUN_BAT_LOCATION,
-                                    "cd build\\libs\n");
-                                FileUtilities.appendStringToFile(file.getAbsolutePath() + Statics.RUN_BAT_LOCATION,
+                                FileUtilities.deleteFile(file.getAbsolutePath() + RUN_BAT);
+                                FileUtilities.writeStringToFile(file.getAbsolutePath() + RUN_BAT,
+                                    "cd build/libs\n");
+                                FileUtilities.appendStringToFile(file.getAbsolutePath() + RUN_BAT,
                                     "\n");
-                                FileUtilities.appendStringToFile(file.getAbsolutePath() + Statics.RUN_BAT_LOCATION,
+                                FileUtilities.appendStringToFile(file.getAbsolutePath() + RUN_BAT,
                                     "java -jar " + file.getName() + ".jar\n");
                             } catch (IOException e1) {
                                 e1.printStackTrace();

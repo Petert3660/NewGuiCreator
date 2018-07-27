@@ -15,7 +15,7 @@ public class ScriptRunner implements Runnable {
     @Override
     public void run() {
         try {
-            String command = "C:\\GradleTutorials\\NewGUICreator\\src\\main\\resources\\" + filename + ".bat";
+            String command = "C:/GradleTutorials/NewGUICreator/src/main/resources/" + filename + ".bat";
             Process buildRun = Runtime.getRuntime().exec(command);
         } catch (IOException ioe) {
             ioe.printStackTrace();

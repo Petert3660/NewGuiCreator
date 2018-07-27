@@ -410,7 +410,7 @@ public class GuiBuilder {
             for (int j = 0; j < menuItems.length; j++) {
                 menuItemDesignation = "menuItem" + String.valueOf(menu) + String.valueOf(menuItem++);
                 if (!menuItems[j].equals("-separator")) {
-                    bw.write("        // This is the control for the " + actualMenuName + "\\" + menuItems[j] + " menu item\n");
+                    bw.write("        // This is the control for the " + actualMenuName + "/" + menuItems[j] + " menu item\n");
                     bw.write("        " + menuItemDesignation + ".addActionListener(new ActionListener() {\n");
                     bw.write("            public void actionPerformed(ActionEvent e) {\n");
                     if (menuItems[j].equals("Exit-implement")) {

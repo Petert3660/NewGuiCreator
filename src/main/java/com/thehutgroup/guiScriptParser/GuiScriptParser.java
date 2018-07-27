@@ -14,7 +14,7 @@ import com.thehutgroup.guicomponents.FreeRadioButtonGroup;
 import com.thehutgroup.guicomponents.FreeTextArea;
 import com.thehutgroup.guicomponents.FreeTextField;
 import com.thehutgroup.guis.GuiProperties;
-import com.thehutgroup.statics.Statics;
+import com.thehutgroup.messages.MessageHandler;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,13 +29,15 @@ public class GuiScriptParser {
 
     private GuiProperties guiProperties;
 
+    private MessageHandler messageHandler;
+
     private int yposition = 90;
-    private static final String RESOURCES_DIR = "C:\\GradleTutorials\\ScriptDirectedGui\\GuiSourceFiles\\";
     private String projectName;
 
     @Autowired
-    public GuiScriptParser(GuiProperties guiProperties) {
+    public GuiScriptParser(GuiProperties guiProperties, MessageHandler messageHandler) {
         this.guiProperties = guiProperties;
+        this.messageHandler = messageHandler;
     }
 
     public void readInputScript(String projectName, String scriptName) throws GuiScriptFileException {
@@ -52,11 +54,11 @@ public class GuiScriptParser {
         // The name of the file to open.
         //Path currentRelativePath = Paths.get("");
         //String currentDir = currentRelativePath.toAbsolutePath().toString();
-        String fileName = RESOURCES_DIR + projectName + "\\" + scriptName;
+        String fileName = messageHandler.getMessage("filepaths.resourcedir", new String[]{""}) + projectName + "/" + scriptName;
         File file = new File(fileName);
         if (!file.exists()) {
             System.out.println("ScriptDirectedGui: Cannot find the script - " + scriptName);
-            System.out.println("ScriptDirectedGui: Please ensure script is saved in directory - " + RESOURCES_DIR);
+            System.out.println("ScriptDirectedGui: Please ensure script is saved in directory - " + messageHandler.getMessage("filepaths.resourcedir", new String[]{""}));
             System.out.println("ScriptDirectedGui: Closing down");
             System.exit(0);
         }
@@ -222,7 +224,8 @@ public class GuiScriptParser {
         // The name of the file to open.
         //Path currentRelativePath = Paths.get("");
         //String currentDir = currentRelativePath.toAbsolutePath().toString();
-        String fileName = RESOURCES_DIR + projectName + "\\" + input + Statics.COMBO_OPTIONS_EXTENSION;
+        String fileName = messageHandler.getMessage("filepaths.resourcedir", new String[]{""}) + projectName
+            + "/" + input + messageHandler.getMessage("filepaths.combo.ext");
 
         // This will reference one line at a time
         String line = null;
