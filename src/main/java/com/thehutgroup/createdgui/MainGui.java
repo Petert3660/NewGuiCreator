@@ -11,7 +11,6 @@ import com.thehutgroup.guis.GuiProperties;
 import com.thehutgroup.messages.MessageHandler;
 import com.thehutgroup.runners.ScriptRunner;
 import com.thehutgroup.statics.Statics;
-import com.thehutgroup.statics.WarningMessages;
 import com.thehutgroup.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
@@ -123,14 +122,14 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
                         if (openOpenFileChoice("GUI Files", Statics.GUI_EXTENSION) == 0) {
-                            JOptionPane.showMessageDialog(tg, WarningMessages.NO_GUI_FILES,
+                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.noguifiles"),
                                     TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.noprojectselected"),
                             TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -140,7 +139,7 @@ public class MainGui extends JFrame {
         menuItem01.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (StringUtils.isEmpty(projectName)) {
-                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.noprojectselected"),
                         TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
@@ -171,14 +170,14 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     try {
                         if (openOpenFileChoice(Statics.COMBO_DESC, Statics.COMBO_OPTIONS_EXTENSION) == 0) {
-                            JOptionPane.showMessageDialog(tg, WarningMessages.NO_COMBO_FILES,
+                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.nocombofiles"),
                                     TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.noprojectselected"),
                             TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -187,7 +186,7 @@ public class MainGui extends JFrame {
         menuItem06.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (StringUtils.isEmpty(projectName)) {
-                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_PROJECT_SELECTED,
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.noprojectselected"),
                         TITLE, JOptionPane.WARNING_MESSAGE);
                 } else {
                     try {
@@ -292,7 +291,7 @@ public class MainGui extends JFrame {
                 if (!StringUtils.isEmpty(projectName)) {
                     if (StringUtils.isEmpty(comp0.getText())) {
                         if (StringUtils.isEmpty(comp0.getText())) {
-                            JOptionPane.showMessageDialog(tg, WarningMessages.NO_FILES,
+                            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.nofiles"),
                                 TITLE, JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
@@ -304,7 +303,7 @@ public class MainGui extends JFrame {
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(tg, WarningMessages.NO_JAVA_PROJECT_SELECTED_COMPILE,
+                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.nojavaprojectselectedcompile"),
                             TITLE, JOptionPane.WARNING_MESSAGE);
                 }
             }
@@ -347,10 +346,10 @@ public class MainGui extends JFrame {
                             TITLE, JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     if (StringUtils.isEmpty(javaProjectName)) {
-                        JOptionPane.showMessageDialog(tg, WarningMessages.NO_JAVA_PROJECT_SELECTED_COPY,
+                        JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.nojavaprojectselectedcopy"),
                                 TITLE, JOptionPane.WARNING_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(tg, WarningMessages.NO_RECENT_SCRIPT,
+                        JOptionPane.showMessageDialog(tg, messageHandler.getMessage("message.warning.norecentscript"),
                                 TITLE, JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -398,7 +397,7 @@ public class MainGui extends JFrame {
         int res = 0;
         if (!StringUtils.isEmpty(comp0.getText())) {
             res = JOptionPane.showConfirmDialog(tg,
-                    WarningMessages.UNSAVED_MATERIAL,
+                messageHandler.getMessage("message.warning.unsavedmaterial"),
                     TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 1) {
                 comp0.clearTextArea();
