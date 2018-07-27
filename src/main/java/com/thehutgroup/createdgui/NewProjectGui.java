@@ -88,7 +88,7 @@ public class NewProjectGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (mode.equals("script")) {
                     if (!StringUtils.isEmpty(comp0.getText())) {
-                        File file = new File(Statics.RESOURCES_DIR + comp0.getText());
+                        File file = new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{comp0.getText()}));
                         if (file.mkdir()) {
                             JOptionPane.showMessageDialog(tg,
                                     "Script Project: " + comp0.getText() + " has been successfully created",
@@ -109,12 +109,12 @@ public class NewProjectGui extends JFrame {
                     }
                 } else if (mode.equals("code")) {
                     if (!StringUtils.isEmpty(comp0.getText())) {
-                        File file = new File(Statics.JAVA_PROJECTS_DIR + comp0.getText());
+                        File file = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
                         if (file.mkdir()) {
                             JOptionPane.showMessageDialog(tg,
                                     "Java Project: " + comp0.getText() + " has been successfully created",
                                     TITLE, JOptionPane.INFORMATION_MESSAGE);
-                            File srcfile = new File(Statics.JAVA_PROJECTS_DIR + Statics.TEMPLATE_PROJECT);
+                            File srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{messageHandler.getMessage("filepaths.templateproject", new String[]{""})}));
                             try {
                                 FileUtilities.copyAllFilesFromSrcDirToTargetDir(srcfile.getAbsolutePath(),
                                         file.getAbsolutePath());
@@ -136,16 +136,18 @@ public class NewProjectGui extends JFrame {
                     }
                 } else if (mode.equals("spring") || mode.equals("spring-web")) {
                     if (!StringUtils.isEmpty(comp0.getText())) {
-                        File file = new File(Statics.JAVA_PROJECTS_DIR + comp0.getText());
+                        File file = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
                         if (file.mkdir()) {
                             JOptionPane.showMessageDialog(tg,
                                     "SpringBoot Project: " + comp0.getText() + " has been successfully created",
                                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                             File srcfile = null;
                             if (mode.equals("spring")) {
-                                srcfile = new File(Statics.JAVA_PROJECTS_DIR + Statics.BASIC_TEMPLATE_PROJECT);
+                                String targDir = messageHandler.getMessage("filepaths.basictemplateproject", new String[]{""});
+                                srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{targDir}));
                             } else if (mode.equals("spring-web")) {
-                                srcfile = new File(Statics.JAVA_PROJECTS_DIR + Statics.WEB_TEMPLATE_PROJECT);
+                                String targDir = messageHandler.getMessage("filepaths.webtemplateproject", new String[]{""});
+                                srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{targDir}));
                             }
                             try {
                                 FileUtilities.copyAllFilesFromSrcDirToTargetDir(srcfile.getAbsolutePath(),
@@ -168,7 +170,7 @@ public class NewProjectGui extends JFrame {
                             // Remove .git directory to break link to remote origin
 
                             if (mode.equals("spring-web")) {
-                                srcfile = new File(Statics.JAVA_PROJECTS_DIR + comp0.getText());
+                                srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
                                 File[] files = srcfile.listFiles();
 
                                 for (File targfile : files) {

@@ -347,8 +347,8 @@ public class MainGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(javaProjectName) && testFile != null) {
                     try {
-                        FileUtilities.fileCopy(Statics.RESOURCES_DIR + projectName + "\\TestGui.java", Statics.JAVA_PROJECTS_DIR + javaProjectName +
-                                Statics.RELATIVE_PATH_FOR_GUIS + "TestGui.java");
+                        FileUtilities.fileCopy(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/TestGui.java"}),
+                            messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/TestGui.java"}));
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -421,9 +421,9 @@ public class MainGui extends JFrame {
     private void openSaveFileChoice(String extension) throws IOException {
         JFileChooser fc = new JFileChooser();
         if (!StringUtils.isEmpty(projectName)) {
-            fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR + projectName));
+            fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName})));
         } else {
-            fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
+            fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})));
         }
         if (extension.equals(Statics.GUI_EXTENSION)) {
             openAndSaveToCorrectFileType(fc, extension, Statics.GUI_DESC);
@@ -439,7 +439,7 @@ public class MainGui extends JFrame {
         if (returnVal == 0) {
             String filename = fc.getSelectedFile().getName().replace(Statics.COMBO_OPTIONS_EXTENSION, "");
             String allText = comp0.getText();
-            FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + filename
+            FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + filename})
                 + Statics.COMBO_OPTIONS_EXTENSION, allText);
         }
     }
@@ -447,7 +447,7 @@ public class MainGui extends JFrame {
     private void openProjectChoice() {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        fc.setCurrentDirectory(new File(Statics.RESOURCES_DIR));
+        fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})));
         int returnVal = fc.showDialog(tg,messageHandler.getMessage("components.filechooser.approve.button.selectproject"));
 
         if (returnVal == 0) {
@@ -463,11 +463,11 @@ public class MainGui extends JFrame {
         FileNameExtensionFilter filter = new FileNameExtensionFilter(desc, extension.replace(".", ""));
         fc.setFileFilter(filter);
         if (!StringUtils.isEmpty(projectName)) {
-            File file = new File(Statics.RESOURCES_DIR + projectName);
+            File file = new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName}));
             fc.setCurrentDirectory(file);
             numberOfFiles = file.listFiles().length;
         } else {
-            File file = new File(Statics.RESOURCES_DIR);
+            File file = new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{""}));
             fc.setCurrentDirectory(file);
             numberOfFiles = file.listFiles().length;
         }
@@ -476,8 +476,8 @@ public class MainGui extends JFrame {
             File file = fc.getSelectedFile();
             testFile = file;
             updateBuiltFile(testFile.getName());
-            FileUtilities.writeStringToFile(Statics.LAST_SCRIPT, "");
-            String allText = FileUtilities.writeFileToString(Statics.RESOURCES_DIR + projectName + "\\" + file.getName());
+            FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.lastscript"), "");
+            String allText = FileUtilities.writeFileToString(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + file.getName()}));
             comp0.setText(allText);
             if (extension.equals(Statics.GUI_EXTENSION)) {
                 menuItem50.setEnabled(true);
@@ -494,16 +494,16 @@ public class MainGui extends JFrame {
     private void compileFile(String projName, String fileName) throws IOException {
         syncComponents();
         String allText = comp0.getText();
-        FileUtilities.writeStringToFile(Statics.RESOURCES_DIR + projectName + "\\" + fileName, allText);
+        FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + fileName}) , allText);
         //System.out.println("Creating GUI Properties and Compiling!");
         createGuiProperties(projName, fileName);
         //System.out.println("ScriptDirectedGui: Copying compiled GUI in to TestGui class!");
-        String src = Statics.SCD_RESOURCES_DIR + "TestGui.java.tmp";
-        String target = Statics.FINAL_GUI_TARGET_DIR + "TestGui.java";
+        String src = messageHandler.getMessage("filepaths.scd.resourcedir", new String[]{"TestGui.java.tmp"});
+        String target = messageHandler.getMessage("filepaths.finalguitargetdir", new String[]{"TestGui.java"});
         FileCopyUtils.copy(new File(src), new File(target));
         FileUtils.deleteQuietly(new File(src));
-        if (!(new File(Statics.FINAL_GUI_DIR + projName + "\\" + fileName).exists())) {
-            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.error.missingscriptfile", new String[]{projName + "\\" + fileName}),
+        if (!(new File(messageHandler.getMessage("filepaths.finalguidir", new String[]{projName + "/" + fileName})).exists())) {
+            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.error.missingscriptfile", new String[]{projName + "/" + fileName}),
                 TITLE, JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
@@ -518,7 +518,7 @@ public class MainGui extends JFrame {
         } catch (GuiScriptFileException e) {
             e.printStackTrace();
         }
-        GuiBuilder gb = new GuiBuilder(guiProperties);
+        GuiBuilder gb = new GuiBuilder(guiProperties, messageHandler);
         gb.buildGuiClass();
     }
 
@@ -547,10 +547,14 @@ public class MainGui extends JFrame {
 
         //This method updates the template project with the latest versions of the Gui Components
 
-        FileUtilities.copyAllFilesFromSrcDirToTargetDir(Statics.JAVA_PROJECTS_DIR + Statics.NEW_GUI_CREATOR_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS,
-            Statics.JAVA_PROJECTS_DIR + Statics.TEMPLATE_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS);
-        FileUtilities.copyAllFilesFromSrcDirToTargetDir(Statics.JAVA_PROJECTS_DIR + Statics.NEW_GUI_CREATOR_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS,
-            Statics.JAVA_PROJECTS_DIR + Statics.TEST_GUI_RUNNER_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS);
+        String srcDir = Statics.NEW_GUI_CREATOR_PROJECT + Statics.RELATIVE_PATH_FOR_COMPONENTS;
+        String targDir = messageHandler.getMessage("filepaths.templateproject", new String[]{Statics.RELATIVE_PATH_FOR_COMPONENTS});
+        String targDirRun = messageHandler.getMessage("filepaths.testrunner", new String[]{Statics.RELATIVE_PATH_FOR_COMPONENTS});
+
+        FileUtilities.copyAllFilesFromSrcDirToTargetDir(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{srcDir}),
+            messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{targDir}));
+        FileUtilities.copyAllFilesFromSrcDirToTargetDir(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{srcDir}),
+            messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{targDirRun}));
     }
 
     private Thread runBuildScript(String fileToRun) {
