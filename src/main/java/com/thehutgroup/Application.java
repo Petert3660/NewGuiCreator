@@ -43,7 +43,8 @@ public class Application implements CommandLineRunner {
 
     private void testGui() {
         System.out.println("New GUI Creator Running, Version: " + BuildVersion.getBuildVersion());
-        System.out.println(messageHandler.getMessage("message.test", new String[]{"by the way"}));
+        System.out.println(messageHandler.getMessage("messages.test", new String[]{"by the way"}));
+        System.out.println(messageHandler.getMessage("statics.test"));
         MainGui tmg = new MainGui(guiProperties, messageHandler);
         GuiHelper.showFrame(tmg);
     }
