@@ -62,6 +62,8 @@ public class FreeLabelComboBoxPair {
 
     public String getLabelText() { return label.getText(); }
 
+    public void setLabelText(String input) { label.setText(input);}
+
     public FreeComboBox getComboBox() {
         return comboBox;
     }
