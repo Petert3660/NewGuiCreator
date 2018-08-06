@@ -234,7 +234,7 @@ public class TestGuiScriptParser {
         } catch (ComboBoxItemsFileException e) {
             assertThat(e.getMessage(), is("Unable to open file 'C:/GradleTutorials/NewGUICreator/GuiSourceFiles/null/projectNames.combo'"));
         } finally {
-            //assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ZERO));
+            assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ZERO));
         }
     }
 
