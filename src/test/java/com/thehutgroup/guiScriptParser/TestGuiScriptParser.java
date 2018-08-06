@@ -215,7 +215,7 @@ public class TestGuiScriptParser {
     }
 
     @Test
-    public void testParseComponents_ComponentsIncluded_ComboBox() {
+    public void testParseComponents_ComponentsIncluded_ComboBoxTests() {
 
         when(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})).thenReturn("C:/GradleTutorials/NewGUICreator/GuiSourceFiles/");
         when(messageHandler.getMessage("filepaths.combo.ext")).thenReturn(".combo");
@@ -236,21 +236,8 @@ public class TestGuiScriptParser {
         } finally {
             assertThat(guiProperties.getComponents().size(), is(ARRAY_SIZE_ZERO));
         }
-    }
 
-    @Test
-    public void testParseComponents_ComponentsIncluded_LabelComboBoxPair() {
-
-        when(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})).thenReturn("C:/GradleTutorials/NewGUICreator/GuiSourceFiles/");
-        when(messageHandler.getMessage("filepaths.combo.ext")).thenReturn(".combo");
-
-        int numItems = 3;
-        ArrayList<String> items = new ArrayList<>();
-        for (int i = 0; i < numItems; i++) {
-            items.add("Choice " + (i + 1));
-        }
-
-        ArrayList<String> components = new ArrayList<>();
+        components = new ArrayList<>();
         components.add(TEST_LABELCOMBOBOXPAIR_INPUT);
 
         try {
