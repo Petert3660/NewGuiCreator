@@ -153,16 +153,7 @@ public class MainGui extends JFrame {
         // This is the control for the File\Save File menu item
         menuItem01.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (StringUtils.isEmpty(projectName)) {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
-                        TITLE, JOptionPane.WARNING_MESSAGE);
-                } else {
-                    try {
-                        openSaveFileChoice(GUI_EXT);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
+                selectFileTypeToOpen(GUI_EXT);
             }
         });
 
@@ -200,16 +191,7 @@ public class MainGui extends JFrame {
 
         menuItem06.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (StringUtils.isEmpty(projectName)) {
-                    JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
-                        TITLE, JOptionPane.WARNING_MESSAGE);
-                } else {
-                    try {
-                        openSaveFileChoice(COMBO_EXT);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
+                selectFileTypeToOpen(COMBO_EXT);
             }
         });
 
@@ -336,6 +318,8 @@ public class MainGui extends JFrame {
         menu6.addSeparator();
         JMenuItem menuItem63 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.createspringboot"));
         menu6.add(menuItem63);
+        JMenuItem menuItem65 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.createguispringboot"));
+        menu6.add(menuItem65);
         JMenuItem menuItem64 = new JMenuItem(messageHandler.getMessage("components.menu.titles.copy.createwebspringboot"));
         menu6.add(menuItem64);
 
@@ -406,6 +390,19 @@ public class MainGui extends JFrame {
 
         menuBar.add(menu4);
 
+    }
+
+    private void selectFileTypeToOpen(String extension) {
+        if (StringUtils.isEmpty(projectName)) {
+            JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
+                TITLE, JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                openSaveFileChoice(extension);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     private int saveUnsavedInput() throws IOException {
@@ -553,8 +550,9 @@ public class MainGui extends JFrame {
         //This method updates the template project with the latest versions of the Gui Components
 
         String rpc = messageHandler.getMessage("filepaths.relativepathforcomponents", new String[]{""});
+        String rpcpt = messageHandler.getMessage("filepaths.relativepathforcomponents.ptconsultancy", new String[]{""});
         String srcDir = messageHandler.getMessage("filepaths.newguicreatorproject", new String[]{rpc});
-        String targDir = messageHandler.getMessage("filepaths.templateproject", new String[]{rpc});
+        String targDir = messageHandler.getMessage("filepaths.templateproject", new String[]{rpcpt});
         String targDirRun = messageHandler.getMessage("filepaths.testrunner", new String[]{rpc});
 
         FileUtilities.copyAllFilesFromSrcDirToTargetDir(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{srcDir}),
