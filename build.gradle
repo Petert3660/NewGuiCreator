@@ -4,7 +4,7 @@ plugins {
 
 def actualprojectName = "NewNewGUICreator"
 def projectName = "NewGuiCreator"
-def version = "1.12"
+def version = "1.13"
 
 def jenkins = "C:/Program Files (x86)/Jenkins/workspace"
 def testEnvironment = "C:/PTConsultancy/LocalTestEnvironment"
