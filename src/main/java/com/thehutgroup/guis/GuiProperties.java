@@ -131,5 +131,10 @@ public class GuiProperties {
         buttons.clear();
         radioButtons.clear();
         menues.clear();
+        frameXSize = 0;
+        frameYSize = 0;
+        guiBackgroundColor = null;
+        mainHeading = null;
+        subHeading = null;
     }
 }

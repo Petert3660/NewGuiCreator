@@ -1,0 +1,20 @@
+// This is a GUI Script which will set up a Main GUI with a menu for entering & creating new GUI Scripts
+
+dimension: xsize=1000, ysize=900
+
+backgroundcolor: value=235, 255, 255
+
+heading: value=<Select appName/heading>
+
+menus:
+    [<Menu1>: <MenuItem11>, <MenuItem12>, <MenuItem13>, -separator, Exit-implement]
+    [<Menu2>: <MenuItem21>]
+    [<Menu3>: <MenuItem31>]
+    [<Menu4>: <MenuItem41>]
+    [<Menu5 etc.>: <MenuItem51>, -separator, <MenuItem512 etc.>]
+
+components:
+    [FreeTextArea: <Description label for TextArea>:, 200, 935, 600, false]
+
+buttons:
+    [Exit-implement]

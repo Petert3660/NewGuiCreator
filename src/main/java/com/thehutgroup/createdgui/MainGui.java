@@ -445,7 +445,7 @@ public class MainGui extends JFrame {
             String filename = fc.getSelectedFile().getName().replace(COMBO_EXT, "");
             String allText = comp0.getText();
             FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + filename})
-                + COMBO_EXT, allText);
+                + extension, allText);
         }
     }
 

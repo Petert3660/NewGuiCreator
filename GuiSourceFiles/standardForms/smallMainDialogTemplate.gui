@@ -4,7 +4,7 @@ dimension: xsize=600, ysize=300
 
 backgroundcolor: value=235, 255, 255
 
-heading: value=<Select heading>
+heading: value=<Select appName/heading>
 
 subheading: value=<Select subheading>
 
