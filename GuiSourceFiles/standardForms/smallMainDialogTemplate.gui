@@ -10,7 +10,7 @@ subheading: value=<Select subheading>
 
 menus:
     [<Menu 1>: <MenuItem11>, <MenuItem12 etc.>, -separator, Exit-implement]
-    [<menu 2>: <MenuItem21>, <MenuItem22>, <MenuItem23 etc>]
+    [<Menu 2>: <MenuItem21>, <MenuItem22>, <MenuItem23 etc>]
 
 components:
 

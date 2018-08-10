@@ -4,9 +4,7 @@ dimension: xsize=550, ysize=300
 
 backgroundcolor: value=230, 255, 255
 
-heading: value=GIT Branch Controller App
-
-subheading: value=Create New Branch in GIT
+heading: value=GIT Branch Controller
 
 menus:
 

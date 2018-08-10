@@ -4,14 +4,14 @@ dimension: xsize=550, ysize=300
 
 backgroundcolor: value=230, 255, 255
 
-heading: value=<Select heading>
+heading: value=<Select appname/heading>
 
 subheading: value=<Select subheading>
 
 menus:
 
 components:
-    [FreeLabelComboBoxPair: <Query label for dropdown>:, 10, projectNames]
+    [FreeLabelComboBoxPair: <Query label for dropdown>:, 10, projectnames]
     [FreeLabelTextFieldPair: <Query label for textfield>:, 10]
 
 buttons:
