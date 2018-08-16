@@ -189,6 +189,10 @@ public class NewProjectGui extends JFrame {
                                             e1.printStackTrace();
                                         }
                                     }
+
+                                    if (targfile.getName().contains(".iml")) {
+                                        FileUtilities.deleteFile(targfile.getName());
+                                    }
                                 }
                             }
 
