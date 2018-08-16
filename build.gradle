@@ -2,7 +2,6 @@ plugins {
     id 'org.springframework.boot' version '2.0.3.RELEASE'
 }
 
-def actualprojectName = "NewNewGUICreator"
 def projectName = "NewGuiCreator"
 def version = "1.13"
 
@@ -37,7 +36,7 @@ dependencies {
 bootJar {
     manifest {
         attributes 'Implementation-Title': projectName,
-                'Implementation-Version': version
+                   'Implementation-Version': version
     }
 }
 
@@ -60,7 +59,7 @@ task copyFiles(dependsOn: test) {
             into file("${testEnvironment}/${projectName}")
         }
 
-        def runnableFile = "${actualprojectName}.jar"
+        def runnableFile = "${projectName}.jar"
         new File("${testEnvironment}/${projectName}/run.bat").text = """
 start /min java -jar $runnableFile
 """
