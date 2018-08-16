@@ -146,9 +146,6 @@ public class NewProjectGui extends JFrame {
                     if (!StringUtils.isEmpty(comp0.getText())) {
                         File file = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
                         if (file.mkdir()) {
-                            JOptionPane.showMessageDialog(tg,
-                                    "SpringBoot Project: " + comp0.getText() + " has been successfully created",
-                                    TITLE, JOptionPane.INFORMATION_MESSAGE);
                             File srcfile = null;
                             if (mode.equals("spring")) {
                                 String targDir = messageHandler.getMessage("filepaths.basictemplateproject", new String[]{""});
@@ -192,6 +189,10 @@ public class NewProjectGui extends JFrame {
                                     FileUtilities.deleteFile(targfile.getAbsolutePath());
                                 }
                             }
+
+                            JOptionPane.showMessageDialog(tg,
+                                "SpringBoot Project: " + comp0.getText() + " has been successfully created",
+                                TITLE, JOptionPane.INFORMATION_MESSAGE);
 
                             mg.updateJavaProjectSelection(comp0.getText());
                             b1.doClick();
