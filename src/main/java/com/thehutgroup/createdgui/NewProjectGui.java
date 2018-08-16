@@ -176,23 +176,20 @@ public class NewProjectGui extends JFrame {
                             }
 
                             // Remove .git directory to break link to remote origin
+                            srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
+                            File[] files = srcfile.listFiles();
 
-                            if (mode.equals("spring-web")) {
-                                srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
-                                File[] files = srcfile.listFiles();
-
-                                for (File targfile : files) {
-                                    if (targfile.getName().equals(".git") && targfile.isDirectory()) {
-                                        try {
-                                            FileUtilities.deleteDirectory(targfile);
-                                        } catch (IOException e1) {
-                                            e1.printStackTrace();
-                                        }
+                            for (File targfile : files) {
+                                if (targfile.getName().equals(".git") && targfile.isDirectory()) {
+                                    try {
+                                        FileUtilities.deleteDirectory(targfile);
+                                    } catch (IOException e1) {
+                                        e1.printStackTrace();
                                     }
+                                }
 
-                                    if (targfile.getAbsolutePath().contains(".iml")) {
-                                        FileUtilities.deleteFile(targfile.getAbsolutePath());
-                                    }
+                                if (targfile.getAbsolutePath().contains(".iml")) {
+                                    FileUtilities.deleteFile(targfile.getAbsolutePath());
                                 }
                             }
 
