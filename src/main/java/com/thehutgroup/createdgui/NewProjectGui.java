@@ -119,9 +119,6 @@ public class NewProjectGui extends JFrame {
                     if (!StringUtils.isEmpty(comp0.getText())) {
                         File file = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{comp0.getText()}));
                         if (file.mkdir()) {
-                            JOptionPane.showMessageDialog(tg,
-                                    "Java Project: " + comp0.getText() + " has been successfully created",
-                                    TITLE, JOptionPane.INFORMATION_MESSAGE);
                             File srcfile = new File(messageHandler.getMessage("filepaths.javaprojectsdir", new String[]{messageHandler.getMessage("filepaths.templateproject", new String[]{""})}));
                             try {
                                 FileUtilities.copyAllFilesFromSrcDirToTargetDir(srcfile.getAbsolutePath(),
@@ -133,6 +130,11 @@ public class NewProjectGui extends JFrame {
                             } catch (IOException e1) {
                                 e1.printStackTrace();
                             }
+
+                            JOptionPane.showMessageDialog(tg,
+                                "Java Project: " + comp0.getText() + " has been successfully created",
+                                TITLE, JOptionPane.INFORMATION_MESSAGE);
+
                             mg.updateJavaProjectSelection(comp0.getText());
                             b1.doClick();
                         } else {

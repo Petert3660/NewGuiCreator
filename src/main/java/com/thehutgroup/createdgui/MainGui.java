@@ -378,6 +378,14 @@ public class MainGui extends JFrame {
             }
         });
 
+        // This is the control for the Create & Copy GUI\Create Basic SpringBoot GUI Project menu item
+        menuItem65.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                NewProjectGui npg = new NewProjectGui(tg, "code", messageHandler);
+                GuiHelper.showFrame(npg);
+            }
+        });
+
         menuBar.add(menu6);
 
         // This is the control for the Help\About menu item
