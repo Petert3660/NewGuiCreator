@@ -4,10 +4,10 @@ dimension: xsize=1000, ysize=900
 
 backgroundcolor: value=235, 255, 255
 
-heading: value=<Select appName/heading>
+heading: value=<Main heading/App Name>
 
 menus:
-    [<Menu1>: <MenuItem11>, <MenuItem12>, <MenuItem13>, -separator, Exit-implement]
+    [<Menu1: <MenuItem11>, <MenuItem12>, <MenuItem13>, -separator, Exit-implement]
     [<Menu2>: <MenuItem21>]
     [<Menu3>: <MenuItem31>]
     [<Menu4>: <MenuItem41>]
