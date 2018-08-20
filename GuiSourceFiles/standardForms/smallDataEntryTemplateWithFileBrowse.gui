@@ -1,0 +1,18 @@
+// This is a test GUI Script which creates a small dialog for entering File data with File Browse
+
+dimension: xsize=700, ysize=250
+
+backgroundcolor: value=230, 255, 255
+
+heading: value=<Select appname/heading>
+
+subheading: value=<Select subheading>
+
+menus:
+
+components:
+    [FreeLabelTextButtonTriple: <Query label for textfield>:, 10, Browse]
+
+buttons:
+    [OK]
+    [Cancel-implement]

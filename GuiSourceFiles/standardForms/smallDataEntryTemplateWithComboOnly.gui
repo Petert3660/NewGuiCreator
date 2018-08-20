@@ -1,6 +1,6 @@
 // This is a test GUI Script which creates a small dialog for entering data
 
-dimension: xsize=550, ysize=300
+dimension: xsize=550, ysize=250
 
 backgroundcolor: value=230, 255, 255
 
@@ -12,7 +12,6 @@ menus:
 
 components:
     [FreeLabelComboBoxPair: <Query label for dropdown>:, 10, projectnames]
-    [FreeLabelTextFieldPair: <Query label for textfield>, 10]
 
 buttons:
     [OK]
