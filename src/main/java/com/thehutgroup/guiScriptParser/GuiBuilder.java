@@ -91,7 +91,7 @@ public class GuiBuilder {
             bw.write("        p1.setLayout(null);\n");
             bw.write("        p1.setBackground(col);\n\n");
 
-            bw.write("        FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 20, new Font(\"\", Font.BOLD + Font.ITALIC, 20));\n\n");
+            bw.write("        FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font(\"\", Font.BOLD + Font.ITALIC, 20));\n\n");
 
             //Add the declaration of the buttons
             String button;
