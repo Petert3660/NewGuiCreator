@@ -64,14 +64,21 @@ public class CopyGuiDialog extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!StringUtils.isEmpty(comp0.getText())) {
                     String src = "C:/GradleTutorials/TestGuiRunner/src/main/java/com/thehutgroup/testgui/TestGui.java";
-                    String targ = "C:/GradleTutorials/" + comp0.getText() + "/src/main/java/com/thehutgroup/createdgui/TestGui.java";
-                    try {
-                        FileUtilities.fileCopy(src, targ);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                    String targ;
+                    String group = findGroupName("C:/GradleTutorials/" + comp0.getText() + "/src/main/java/com");
+                    if (!StringUtils.isEmpty(group)) {
+                        targ = "C:/GradleTutorials/" + comp0.getText() + "/src/main/java/com/" + group + "/createdgui/TestGui.java";
+                        try {
+                            FileUtilities.fileCopy(src, targ);
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        JOptionPane.showMessageDialog(tg, "The new GUI has been successfully copied to project " + comp0.getText(),
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(tg, "The new GUI cannot be copied to project " + comp0.getText(),
+                            TITLE, JOptionPane.INFORMATION_MESSAGE);
                     }
-                    JOptionPane.showMessageDialog(tg, "The new GUI has been successfully copied to project " + comp0.getText(),
-                        TITLE, JOptionPane.INFORMATION_MESSAGE);
                     b1.doClick();
                 }  else {
                     JOptionPane.showMessageDialog(tg, "No project selected - please enter/select a project before continuing",
@@ -106,5 +113,16 @@ public class CopyGuiDialog extends JFrame {
         p1.add(comp0.getPanel());
         p1.add(l0);
         this.add(p1);
+    }
+
+    private String findGroupName(String directory) {
+        File file = new File(directory);
+        if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files.length == 1 && files[0].isDirectory()) {
+                return files[0].getName();
+            }
+        }
+        return "";
     }
 }
