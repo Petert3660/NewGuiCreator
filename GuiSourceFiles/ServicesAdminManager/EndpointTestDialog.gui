@@ -11,7 +11,7 @@ subheading: value=Endpoint Test
 menus:
 
 components:
-    [FreeRadioButtonGroup: Get, 50, Post, 100, Put, 100, Delete, 120]
+    [FreeRadioButtonGroup: Get, 50, Post, 60, Put, 50, Delete, 80]
     [FreeLabelComboBoxPair: Please select the service name:, 10, projectNames]
     [FreeLabelTextFieldPair: Please enter endpoint:, 10]
     [FreeTextArea: Body:, 200, 635, 200, false]

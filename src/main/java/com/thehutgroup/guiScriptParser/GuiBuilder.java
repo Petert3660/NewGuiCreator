@@ -135,7 +135,7 @@ public class GuiBuilder {
                 if (i == 0) {
                     bw.write("        " + radios + ".setSelected();\n");
                 }
-                startX = ((FreeRadioButton) guiProperties.getRadioButtons().get(i)).getWidth() + 30;
+                startX = startX + ((FreeRadioButton) guiProperties.getRadioButtons().get(i)).getWidth() + 30;
             }
             bw.write("\n");
 
