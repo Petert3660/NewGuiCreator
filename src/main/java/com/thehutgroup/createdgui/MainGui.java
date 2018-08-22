@@ -406,7 +406,8 @@ public class MainGui extends JFrame {
         // This is the control for the Create & Copy GUI\Open Existing GUI Project menu item
         menuItem62.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                CopyGuiDialog copyGuiDialog = new CopyGuiDialog(tg, messageHandler);
+                GuiHelper.showFrame(copyGuiDialog);
             }
         });
 
