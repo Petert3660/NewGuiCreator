@@ -234,7 +234,23 @@ public class MainGui extends JFrame {
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
-                p1.repaint();
+                comp0.appendNewLine("// This is a new GUI Script");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("dimension: xsize=1000, ysize=900");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("backgroundcolor: value=235, 255, 255");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("heading: value=<AppName/Heading>");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("subheading: value=<Subheading>");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("menus:");
+                comp0.appendNewLine("    [<Menu1>: <MenuItem11>, <MenuItem12>, -separator, Exit-implement]");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("components:");
+                comp0.appendNewLine("");
+                comp0.appendNewLine("buttons:");
+                comp0.appendNewLine("    [Exit-implement]");
                 try {
                     int res = saveUnsavedInput();
                 } catch (IOException e1) {
@@ -263,6 +279,38 @@ public class MainGui extends JFrame {
         });
 
         menuBar.add(menu3);
+
+        JMenu menu7 = new JMenu(messageHandler.getMessage("components.menu.titles.addtemplates"));
+        JMenu menu8 = new JMenu(messageHandler.getMessage("components.menu.titles.addtemplates"));
+        JMenuItem menuItem80 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreebuttontemplate"));
+        menu8.add(menuItem80);
+        menu8.addSeparator();
+        JMenuItem menuItem81 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreelabeltemplate"));
+        menu8.add(menuItem81);
+        JMenuItem menuItem82 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreetextfieldtemplate"));
+        menu8.add(menuItem82);
+        JMenuItem menuItem83 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreetextareatemplate"));
+        menu8.add(menuItem83);
+        JMenuItem menuItem84 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreecomboboxtemplate"));
+        menu8.add(menuItem84);
+        JMenuItem menuItem85 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreecheckboxtemplate"));
+        menu8.add(menuItem85);
+        JMenuItem menuItem86 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreeradiobuttontemplate"));
+        menu8.add(menuItem86);
+        JMenuItem menuItem87 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreeradiobuttongrouptemplate"));
+        menu8.add(menuItem87);
+        JMenuItem menuItem88 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreetextpanetemplate"));
+        menu8.add(menuItem88);
+        menu8.addSeparator();
+        JMenuItem menuItem89 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreelabeltextpairtemplate"));
+        menu8.add(menuItem89);
+        JMenuItem menuItem810 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreelabelcomboboxpairtemplate"));
+        menu8.add(menuItem810);
+        JMenuItem menuItem811 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreelabeltextbuttontripletemplate"));
+        menu8.add(menuItem811);
+
+        menu7.add(menu8);
+        menuBar.add(menu7);
 
         JMenu menu4 = new JMenu(messageHandler.getMessage("components.menu.titles.help"));
         JMenuItem menuItem40 = new JMenuItem(messageHandler.getMessage("components.menu.titles.help.help"));
@@ -433,7 +481,8 @@ public class MainGui extends JFrame {
         if (!StringUtils.isEmpty(projectName)) {
             fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName})));
         } else {
-            fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})));
+            fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{"default"})));
+            updateProjectSelection("default");
         }
         if (extension.equals(GUI_EXT)) {
             openAndSaveToCorrectFileType(fc, extension, messageHandler.getMessage("filepaths.gui.description"));
@@ -447,6 +496,8 @@ public class MainGui extends JFrame {
         fc.setFileFilter(filter);
         int returnVal = fc.showSaveDialog(tg);
         if (returnVal == 0) {
+            testFile = fc.getSelectedFile();
+            updateBuiltFile(testFile.getName());
             String filename = fc.getSelectedFile().getName().replace(COMBO_EXT, "");
             String allText = comp0.getText();
             FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + filename})
