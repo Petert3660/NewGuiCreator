@@ -8,12 +8,18 @@ import com.thehutgroup.guicomponents.FreeButton;
 import com.thehutgroup.guicomponents.FreeLabel;
 import com.thehutgroup.guicomponents.FreeLabelTextButtonTriple;
 import com.thehutgroup.messages.MessageHandler;
+import com.thehutgroup.utilities.FileUtilities;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class CopyGuiDialog extends JFrame {
@@ -56,7 +62,21 @@ public class CopyGuiDialog extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                b1.doClick();
+                if (!StringUtils.isEmpty(comp0.getText())) {
+                    String src = "C:/GradleTutorials/TestGuiRunner/src/main/java/com/thehutgroup/testgui/TestGui.java";
+                    String targ = "C:/GradleTutorials/" + comp0.getText() + "/src/main/java/com/thehutgroup/createdgui/TestGui.java";
+                    try {
+                        FileUtilities.fileCopy(src, targ);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    JOptionPane.showMessageDialog(tg, "The new GUI has been successfully copied to project " + comp0.getText(),
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                    b1.doClick();
+                }  else {
+                    JOptionPane.showMessageDialog(tg, "No project selected - please enter/select a project before continuing",
+                        TITLE, JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
@@ -71,7 +91,13 @@ public class CopyGuiDialog extends JFrame {
         // This is the control for the Browse button on the triple Label, Text, Button
         comp0.getButton().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Button - " + comp0.getButtonText() + " in the triple group has been clicked");
+                JFileChooser fc = new JFileChooser();
+                fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                fc.setCurrentDirectory(new File("C:/GradleTutorials"));
+                int returnVal = fc.showDialog(tg, "Select");
+                if (returnVal == 0) {
+                    comp0.setText(fc.getSelectedFile().getName());
+                }
             }
         });
 
