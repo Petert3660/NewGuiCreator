@@ -233,6 +233,7 @@ public class MainGui extends JFrame {
         // This is the control for the Create GUI Script\Create New GUI Script menu item
         menuItem20.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                comp0.clearTextArea();
                 comp0.setLabelText(messageHandler.getMessage("components.textarea.label"));
                 comp0.appendNewLine("// This is a new GUI Script");
                 comp0.appendNewLine("");
@@ -295,8 +296,6 @@ public class MainGui extends JFrame {
         menu8.add(menuItem84);
         JMenuItem menuItem85 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreecheckboxtemplate"));
         menu8.add(menuItem85);
-        JMenuItem menuItem86 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreeradiobuttontemplate"));
-        menu8.add(menuItem86);
         JMenuItem menuItem87 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreeradiobuttongrouptemplate"));
         menu8.add(menuItem87);
         JMenuItem menuItem88 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreetextpanetemplate"));
@@ -308,8 +307,95 @@ public class MainGui extends JFrame {
         menu8.add(menuItem810);
         JMenuItem menuItem811 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addfreelabeltextbuttontripletemplate"));
         menu8.add(menuItem811);
-
+        menu8.addSeparator();
+        JMenuItem menuItem812 = new JMenuItem(messageHandler.getMessage("components.menu.titles.addmenu"));
+        menu8.add(menuItem812);
         menu7.add(menu8);
+
+        // This is the control for the Add Components\AddComponents\Add FreeButton menu item
+        menuItem80.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[<Button Name>]", "buttons:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeLabel menu item
+        menuItem81.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeLabel: <Label Content>, 400]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeTextField menu item
+        menuItem82.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeTextField: <TextField Text content>, 500]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeTextArea menu item
+        menuItem83.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeTextArea: <Text Area Title Label>, 200, 950, 200, false]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeComboBox menu item
+        menuItem84.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeComboBox: 200, defaultNames]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeCheckBox menu item
+        menuItem85.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeCheckBox: <Check Box Label, 300]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeRadioButtonGroup menu item
+        menuItem87.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeRadioButtonGroup: <Radio Button 1>, 150, Radio Button 2>, 150]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeTextPane menu item
+//        menuItem88.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                updateTextArea("[FreeTextField: <TextField Text content>, 500]", "components:");
+//            }
+//        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeLabelTextPair menu item
+        menuItem89.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeLabelTextFieldPair: <Label Content>, 10]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeLabelComboBoxPair menu item
+        menuItem810.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeLabelComboBoxPair: <Label Content>, 10, defaultNames]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add FreeLabelTextButtonTriple menu item
+        menuItem811.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[FreeLabelTextButtonTriple: <Label Content>, 10, <Button>]", "components:");
+            }
+        });
+
+        // This is the control for the Add Components\AddComponents\Add Menu menu item
+        menuItem812.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                updateTextArea("[<New Menu>: <MenuItem1>, <MenuItem2>, <MenuItem3>, -separator, <MenuItem4>]", "menus:");
+            }
+        });
+
         menuBar.add(menu7);
 
         JMenu menu4 = new JMenu(messageHandler.getMessage("components.menu.titles.help"));
@@ -449,6 +535,20 @@ public class MainGui extends JFrame {
 
     }
 
+    private void updateTextArea(String addString, String after) {
+        String text = comp0.getText();
+        text = insertIntoString(text, addString, after);
+        comp0.clearTextArea();
+        comp0.setText(text);
+    }
+
+    private String insertIntoString(String text, String addString, String after) {
+        String[] temp = text.split(after);
+        text = temp[0] + after +"\n    " + addString + temp[1];
+
+        return text;
+    }
+
     private void selectFileTypeToOpen(String extension) {
         if (StringUtils.isEmpty(projectName)) {
             JOptionPane.showMessageDialog(tg, messageHandler.getMessage("messages.warning.noprojectselected"),
@@ -468,9 +568,7 @@ public class MainGui extends JFrame {
             res = JOptionPane.showConfirmDialog(tg,
                 messageHandler.getMessage("messages.warning.unsavedmaterial"),
                     TITLE, JOptionPane.YES_NO_OPTION);
-            if (res == 1) {
-                comp0.clearTextArea();
-            } else {
+            if (res == 0) {
                 openSaveFileChoice(GUI_EXT);
             }
         }
@@ -499,7 +597,7 @@ public class MainGui extends JFrame {
         if (returnVal == 0) {
             testFile = fc.getSelectedFile();
             updateBuiltFile(testFile.getName());
-            String filename = fc.getSelectedFile().getName().replace(COMBO_EXT, "");
+            String filename = fc.getSelectedFile().getName().replace(extension, "");
             String allText = comp0.getText();
             FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + filename})
                 + extension, allText);

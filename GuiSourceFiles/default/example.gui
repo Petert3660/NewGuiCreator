@@ -9,9 +9,20 @@ heading: value=<AppName/Heading>
 subheading: value=<Subheading>
 
 menus:
+    [<New Menu>: <MenuItem1>, <MenuItem2>, <MenuItem3>, -separator, <MenuItem4>]
     [<Menu1>: <MenuItem11>, <MenuItem12>, -separator, Exit-implement]
 
 components:
+    [FreeLabelTextButtonTriple: <Label Content>, 10, <Button>]
+    [FreeLabelComboBoxPair: <Label Content>, 10, defaultNames]
+    [FreeLabelTextFieldPair: <Label Content>, 10]
+    [FreeRadioButtonGroup: <Radio Button 1>, 150, Radio Button 2>, 150]
+    [FreeCheckBox: <Check Box Label, 300]
+    [FreeComboBox: 200, defaultNames]
+    [FreeTextArea: <Text Area Title Label>, 200, 950, 200, false]
+    [FreeTextField: <TextField Text content>, 500]
+    [FreeLabel: <Label Content>, 400]
 
 buttons:
+    [<Button Name>]
     [Exit-implement]
