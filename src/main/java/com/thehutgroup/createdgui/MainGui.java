@@ -655,6 +655,7 @@ public class MainGui extends JFrame {
     private void compileFile(String projName, String fileName) throws IOException {
         syncComponents();
         String allText = comp0.getText();
+        fileName = fileName + GUI_EXT;
         FileUtilities.writeStringToFile(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName + "/" + fileName}) , allText);
         //System.out.println("Creating GUI Properties and Compiling!");
         createGuiProperties(projName, fileName);
