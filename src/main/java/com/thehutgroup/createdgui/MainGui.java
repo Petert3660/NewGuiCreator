@@ -570,6 +570,9 @@ public class MainGui extends JFrame {
                     TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 0) {
                 openSaveFileChoice(GUI_EXT);
+            } else {
+                NewProjectGui newProjectGui = new NewProjectGui(tg, "script", messageHandler);
+                GuiHelper.showFrame(newProjectGui);
             }
         }
         return res;
