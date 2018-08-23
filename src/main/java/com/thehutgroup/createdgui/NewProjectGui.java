@@ -21,6 +21,8 @@ import org.apache.commons.lang.StringUtils;
 
 public class NewProjectGui extends JFrame {
 
+    private static String GUI_EXT;
+
     private static final String SUB_HEADING_ONE = " - Create New GUI Script Project";
     private static final String SUB_HEADING_TWO = " - Create New Java Project";
     private static final String SUB_HEADING_THREE = " - Create SpringBoot Project";
@@ -47,6 +49,8 @@ public class NewProjectGui extends JFrame {
 
         SETTINGS_GRADLE = messageHandler.getMessage("filepaths.settings.gradle.location");
         RUN_BAT = messageHandler.getMessage("filepaths.run.bat.location");
+
+        GUI_EXT = messageHandler.getMessage("filepaths.gui.ext");
 
         this.mode = mode;
         TITLE = messageHandler.getMessage("constants.mainheading");
@@ -94,7 +98,7 @@ public class NewProjectGui extends JFrame {
         // This is the control for the OK button
         b0.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (mode.equals("script")) {
+                if (mode.contains("script")) {
                     if (!StringUtils.isEmpty(comp0.getText())) {
                         File file = new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{comp0.getText()}));
                         if (file.mkdir()) {
@@ -102,6 +106,13 @@ public class NewProjectGui extends JFrame {
                                     "Script Project: " + comp0.getText() + " has been successfully created",
                                     TITLE, JOptionPane.INFORMATION_MESSAGE);
                             mg.updateProjectSelection(comp0.getText());
+                            if (mode.equals("script-new")) {
+                                try {
+                                    mg.openSaveFileChoice(GUI_EXT);
+                                } catch (IOException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
                             b1.doClick();
                         } else {
                             JOptionPane.showMessageDialog(tg, "Unable to create project: " + comp0.getText()

@@ -569,16 +569,14 @@ public class MainGui extends JFrame {
                 messageHandler.getMessage("messages.warning.unsavedmaterial"),
                     TITLE, JOptionPane.YES_NO_OPTION);
             if (res == 0) {
-                openSaveFileChoice(GUI_EXT);
-            } else {
-                NewProjectGui newProjectGui = new NewProjectGui(tg, "script", messageHandler);
+                NewProjectGui newProjectGui = new NewProjectGui(tg, "script-new", messageHandler);
                 GuiHelper.showFrame(newProjectGui);
             }
         }
         return res;
     }
 
-    private void openSaveFileChoice(String extension) throws IOException {
+    public void openSaveFileChoice(String extension) throws IOException {
         JFileChooser fc = new JFileChooser();
         if (!StringUtils.isEmpty(projectName)) {
             fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{projectName})));
