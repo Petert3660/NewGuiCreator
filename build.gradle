@@ -3,7 +3,7 @@ plugins {
 }
 
 def projectName = "NewGuiCreator"
-def version = "1.13"
+def version = "1.2"
 
 def jenkins = "C:/Program Files (x86)/Jenkins/workspace"
 def testEnvironment = "C:/PTConsultancy/LocalTestEnvironment"
