@@ -609,7 +609,7 @@ public class MainGui extends JFrame {
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fc.setCurrentDirectory(new File(messageHandler.getMessage("filepaths.resourcedir", new String[]{""})));
-        int returnVal = fc.showDialog(tg,messageHandler.getMessage("components.filechooser.approve.button.selectproject"));
+        int returnVal = fc.showDialog(tg, messageHandler.getMessage("components.filechooser.approve.button.selectproject"));
 
         if (returnVal == 0) {
             File file = fc.getSelectedFile();
