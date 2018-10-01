@@ -9,7 +9,7 @@ heading: value=<AppName/Heading>
 subheading: value=<Subheading>
 
 menus:
-    [<Menu1>: <MenuItem11>, <MenuItem12>, -separator, Exit-implement]
+    [<New Menu>: <MenuItem1>, <MenuItem2>, <MenuItem3>, -separator, <MenuItem4>]
 
 components:
 

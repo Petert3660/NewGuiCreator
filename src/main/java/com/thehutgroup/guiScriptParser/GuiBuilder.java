@@ -106,8 +106,13 @@ public class GuiBuilder {
                 xStart = guiProperties.getFrameXSize()/2 - 40 - (110 * multiplier);
                 xSubtract = 40 + (110 * multiplier);
             }
-            int yFixed = guiProperties.getFrameYSize() - 100;
             bw.write("        int xpos = FRAME_X_SIZE / 2 - " + xSubtract + ";\n");
+            if (guiProperties.getMenues().size() > 0) {
+                bw.write("        int ypos = FRAME_Y_SIZE - 120;\n");
+            } else {
+                bw.write("        int ypos = FRAME_Y_SIZE - 100;\n");
+            }
+            bw.write("        int buttonSize = 80;\n");
             for (int i = 0; i < guiProperties.getButtons().size(); i++) {
                 if (i > 0) {
                     bw.write("        xpos = xpos + 110;\n");
@@ -117,11 +122,11 @@ public class GuiBuilder {
                     String buttonText = ((FreeButton) guiProperties.getButtons().get(i)).getButtonText().replace("-implement", "");
                     bw.write("        FreeButton " + button + " = new FreeButton("
                             + "\"" + buttonText
-                            + "\", xpos, " + yFixed + ", 80);\n\n");
+                            + "\", xpos, ypos, buttonSize);\n\n");
                 } else {
                     bw.write("        FreeButton " + button + " = new FreeButton("
                             + "\"" + ((FreeButton) guiProperties.getButtons().get(i)).getButtonText()
-                            + "\", xpos, " + yFixed + ", 80);\n\n");
+                            + "\", xpos, ypos, buttonSize);\n\n");
                 }
             }
 
