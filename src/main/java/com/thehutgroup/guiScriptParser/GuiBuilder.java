@@ -96,27 +96,33 @@ public class GuiBuilder {
             //Add the declaration of the buttons
             String button;
             int xStart;
+            int xSubtract;
             if (guiProperties.getButtons().size() % 2 == 0) {
                 int multiplier = (guiProperties.getButtons().size() / 2) - 1;
                 xStart = guiProperties.getFrameXSize()/2 - 95 - (110 * multiplier);
+                xSubtract = 95 + (110 * multiplier);
             } else {
                 int multiplier = guiProperties.getButtons().size() / 2;
                 xStart = guiProperties.getFrameXSize()/2 - 40 - (110 * multiplier);
+                xSubtract = 40 + (110 * multiplier);
             }
             int yFixed = guiProperties.getFrameYSize() - 100;
+            bw.write("        int xpos = FRAME_X_SIZE / 2 - " + xSubtract + ";\n");
             for (int i = 0; i < guiProperties.getButtons().size(); i++) {
+                if (i > 0) {
+                    bw.write("        xpos = xpos + 110;\n");
+                }
                 button = "b" + String.valueOf(i);
                 if (((FreeButton) guiProperties.getButtons().get(i)).getButtonText().contains("-implement")) {
                     String buttonText = ((FreeButton) guiProperties.getButtons().get(i)).getButtonText().replace("-implement", "");
                     bw.write("        FreeButton " + button + " = new FreeButton("
                             + "\"" + buttonText
-                            + "\", " + xStart + ", " + yFixed + ", 80);\n\n");
+                            + "\", xpos, " + yFixed + ", 80);\n\n");
                 } else {
                     bw.write("        FreeButton " + button + " = new FreeButton("
                             + "\"" + ((FreeButton) guiProperties.getButtons().get(i)).getButtonText()
-                            + "\", " + xStart + ", " + yFixed + ", 80);\n\n");
+                            + "\", xpos, " + yFixed + ", 80);\n\n");
                 }
-                xStart = xStart + 110;
             }
 
             // Add declaration of radio buttons
