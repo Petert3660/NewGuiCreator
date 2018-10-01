@@ -65,8 +65,7 @@ public class GuiBuilder {
 
             bw.write("    private static final String MAIN_HEADING = \"" + guiProperties.getMainHeading() + "\";\n");
             if (!StringUtils.isEmpty(guiProperties.getSubHeading())) {
-                bw.write("    private static final String SUB_HEADING = \"" + guiProperties.getSubHeading() + "\";\n");
-                bw.write("    private static final String TITLE = MAIN_HEADING + \" - \" + SUB_HEADING;\n");
+                bw.write("    private static final String TITLE = \"" + guiProperties.getSubHeading() + "\";\n");
             } else {
                 bw.write("    private static final String TITLE = MAIN_HEADING;\n");
             }
@@ -91,7 +90,11 @@ public class GuiBuilder {
             bw.write("        p1.setLayout(null);\n");
             bw.write("        p1.setBackground(col);\n\n");
 
-            bw.write("        FreeLabel l0 = new FreeLabel(MAIN_HEADING, 30, 30, 500, 30, new Font(\"\", Font.BOLD + Font.ITALIC, 20));\n\n");
+            bw.write("        final int xAndyStart = 30;\n");
+            bw.write("        final int xSize = 500;\n");
+            bw.write("        final int fontSize = 20;\n");
+            bw.write("        final String fontName = \"\";\n");
+            bw.write("        FreeLabel l0 = new FreeLabel(MAIN_HEADING, xAndyStart, xAndyStart, xSize, xAndyStart, new Font(fontName, Font.BOLD + Font.ITALIC, fontSize));\n\n");
 
             //Add the declaration of the buttons
             String button;
